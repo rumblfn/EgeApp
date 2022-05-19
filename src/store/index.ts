@@ -7,5 +7,7 @@ const rootReducer = combineReducers({
     subjects: subjectsReducer,
 })
 
+export type RootState = ReturnType<typeof rootReducer>
+
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

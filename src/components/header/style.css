@@ -1,0 +1,17 @@
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+.header-right {
+    display: flex;
+}
+
+.header-link {
+    margin: 0 16px;
+}

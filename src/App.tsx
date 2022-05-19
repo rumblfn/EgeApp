@@ -1,25 +1,19 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Header } from './components/header';
+import { HomePage } from './routes/Home';
 
 function App() {
 
-  useEffect(() => {
-    fetchSubjects()
-  }, [])
-
-  async function fetchSubjects() {
-    try {
-      const response = await axios.get('http://192.168.1.61:8888/subject/getSubjects')
-      console.log(response)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   return (
     <div className="App">
-      
+      <Header/>
+      <Routes>
+          <Route path="/*" element={
+            <HomePage />
+          } />
+        </Routes>
     </div>
   );
 }

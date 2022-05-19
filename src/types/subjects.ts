@@ -4,6 +4,11 @@ export enum SubjectsActionTypes {
     FETCH_SUBJECTS_ERROR = "FETCH_SUBJECTS_ERROR"
 }
 
+export interface Subject {
+    id: number;
+    title: string;
+}
+
 export interface SubjectsState {
     subjects: any[];
     loading: boolean;
