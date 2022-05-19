@@ -6,7 +6,7 @@
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    transform: translateY(-2em);
+    transform: translateY(-3em);
     z-index: -1;
     transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
@@ -22,7 +22,10 @@
     background: #DDD;
     border-radius: 6px;
     padding: 12px 0;
-    margin: 10px;
+    margin: -12px 10px;
+    z-index: 3;
+    background: var(--app-color);
+    background: linear-gradient(180deg, var(--app-color) 0%, var(--app-third-color) 170%);
 }
 
 .sub-menu-link {

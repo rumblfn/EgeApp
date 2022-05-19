@@ -6,7 +6,8 @@ import arrowHeader from "../../images/arrow-header.svg";
 
 export const Header: FC = () => {
   return (
-    <div className="header-box">
+    <div className="header-bg">
+      <div className="header-box">
       <div className="header-left">
         <div className="sub-menu-parent">
           <div style={{display: 'flex', alignItems: 'center'}}>
@@ -20,6 +21,7 @@ export const Header: FC = () => {
         <p className="header-link">Sign in</p>
         <p className="header-link">Sign up</p>
       </div>
+    </div>
     </div>
   );
 };
