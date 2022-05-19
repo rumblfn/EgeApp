@@ -1,13 +1,18 @@
 import './style.css'
 import { ButtonHome } from '../../components/button'
 import egeImage from '../../images/ege-homepage-image.png'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { Subject } from '../../types/subjects'
+import { FC } from 'react'
 
-export const HomePage = () => {
+export const HomePage: FC = () => {
+    const {loading, subjects, error} = useTypedSelector(state => state.subjects)
+
     return (
         <div className="container">
             <div className="homepage-top-box">
                 <div className="homepage-top-box-left">
-                    <h3>Приложение для подготовки к ЕГЭ</h3>
+                    <h1>Приложение для подготовки к ЕГЭ</h1>
                     <p style={{marginBottom: 6}}>
                         Здесь вы можете получить необходимые знания для успешной сдачи ЕГЭ по математике, информатике и русскому языку.
                     </p>
@@ -21,6 +26,16 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="homepage-box">
+                <h2>Доступные модули</h2>
+                <div>
+                    {subjects.map((subject: Subject) => 
+                        <p key={subject.id} style={{marginLeft: 24}}>
+                            {subject.title}
+                        </p>)
+                    }
+                </div>
+            </div>
+            <div className="homepage-box" style={{marginTop: 64}}>
                 <h2>Вопросы и ответы</h2>
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1em'}}>
                     <div className='one-question'>
