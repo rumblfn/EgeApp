@@ -6,6 +6,7 @@ import { HomePage } from './routes/Home';
 import { Footer } from './components/footer';
 import { SubjectPage } from './routes/Subject';
 import { AuthPage } from './routes/Auth';
+import { PrivateRoute } from './hocs/PrivateRoute';
 
 function App() {
 
