@@ -11,7 +11,7 @@
 
 .header-bg {
     background-color: var(--app-color);
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--vio-color);
     border-left: 0 solid var(--vio-color);
     transition: border-left 300ms ease-in-out, padding-left 300ms ease-in-out;
 }

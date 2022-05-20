@@ -2,7 +2,7 @@ import { FC } from "react"
 
 export const Footer: FC = () => {
     return (
-        <div style={{minHeight: 64, backgroundColor: 'var(--app-color)', marginTop: 64, borderTop: '2px solid black'}}>
+        <div style={{minHeight: 64, backgroundColor: 'var(--app-color)', marginTop: 64, borderTop: '2px solid var(--vio-color)'}}>
             <div className="container">
                 <div style={{display: 'flex', alignItems: 'center', height: 64, justifyContent: 'flex-end'}}>
                     <a href="https://github.com/rumblfn/EgeApp" style={{display: 'flex', alignItems: 'center'}}>
