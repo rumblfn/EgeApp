@@ -11,7 +11,15 @@
 
 .header-bg {
     background-color: var(--app-color);
+    border-bottom: 2px solid black;
+    border-left: 0 solid var(--vio-color);
+    transition: border-left 300ms ease-in-out, padding-left 300ms ease-in-out;
 }
+
+.header-bg:hover {
+    padding-left: 0.5rem;
+    border-left: 0.5rem solid var(--vio-color);
+  }
 
 .header-right {
     display: flex;

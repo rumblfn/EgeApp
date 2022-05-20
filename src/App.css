@@ -8,3 +8,31 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.link-with-hover1 {
+    position: relative;
+    color: var(--app-third-color);
+    font-size: 28px;
+}
+
+.link-with-hover1::before {
+    background-color: var(--app-third-color);
+    transform: scaleY(0.1);
+    bottom: -0.065em;
+    content: "";
+    transform-origin: center bottom;
+    display: block;
+    position: absolute;
+    inset: 0px;
+    pointer-events: none;
+    transition: transform 120ms;
+}
+
+.link-with-hover1:hover {
+    color: var(--app-color-theme);
+}
+
+.link-with-hover1:hover::before {
+    transform: scaleY(1);
+    mix-blend-mode: hue;
+}

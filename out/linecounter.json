@@ -1,0 +1,234 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "/Users/samilvaliahmetov/education/programming/local-github/ege-app",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-05-19 21:15:50",
+            "filesum": 29,
+            "codesum": 29018,
+            "commentsum": 7,
+            "blanksum": 119,
+            "statistics": {
+                ".ts": {
+                    "code": 99,
+                    "comment": 0,
+                    "blank": 15
+                },
+                ".tsx": {
+                    "code": 199,
+                    "comment": 0,
+                    "blank": 13
+                },
+                ".css": {
+                    "code": 329,
+                    "comment": 0,
+                    "blank": 59
+                },
+                ".json": {
+                    "code": 28320,
+                    "comment": 0,
+                    "blank": 7
+                },
+                "": {
+                    "code": 18,
+                    "comment": 1,
+                    "blank": 5
+                },
+                ".html": {
+                    "code": 12,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".svg": {
+                    "code": 13,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 28,
+                    "comment": 6,
+                    "blank": 20
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 28248,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "public/index.html"
+                },
+                {
+                    "blank": 20,
+                    "code": 26,
+                    "comment": 6,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/App.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/App.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "src/components/button/index.tsx"
+                },
+                {
+                    "blank": 44,
+                    "code": 222,
+                    "comment": 0,
+                    "filename": "src/components/button/style.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src/components/footer/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src/components/header/details.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/components/header/index.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src/components/header/style.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src/components/listOfSubjects/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src/hooks/useActions.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/hooks/useTypedSelector.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/images/arrow-header.svg"
+                },
+                {
+                    "filename": "src/images/ege-homepage-image.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src/index.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src/routes/Home/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src/routes/Home/style.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/subjects.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/store/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/store/subjects/subjectsReducer.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/types/images.d.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/types/subjects.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "tsconfig.json"
+                }
+            ]
+        }
+    ]
+}

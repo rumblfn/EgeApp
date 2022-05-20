@@ -18,8 +18,8 @@ export const Header: FC = () => {
         </div>
       </div>
       <div className="header-right">
-        <p className="header-link">Sign in</p>
-        <p className="header-link">Sign up</p>
+        <p className="header-link link-with-hover">Sign in</p>
+        <p className="header-link link-with-hover">Sign up</p>
       </div>
     </div>
     </div>

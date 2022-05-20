@@ -5,8 +5,14 @@
     margin: 72px 0 72px;
     padding: 32px;
     display: grid;
-    grid-template-columns: 6fr 5fr;
+    grid-template-columns: 1fr 1fr;
     overflow: hidden;
+
+    background: repeating-conic-gradient(from 50deg at 75% -25%, var(--app-third-color) 15%, var(--vio-color) 30%);
+}
+
+.homepage-top-box-left p {
+    font-size: 26px;
 }
 
 .homepage-box {

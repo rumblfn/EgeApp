@@ -1,11 +1,12 @@
 import './style.css'
 import { ButtonHome } from '../../components/button'
-import egeImage from '../../images/ege-homepage-image.png'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { Subject } from '../../types/subjects'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import './bulb.css'
 
 export const HomePage: FC = () => {
+    const [bulbOn, setBulbOn] = useState<boolean>(true)
     const {loading, subjects, error} = useTypedSelector(state => state.subjects)
 
     return (
@@ -21,8 +22,15 @@ export const HomePage: FC = () => {
                     </p>
                     <ButtonHome />
                 </div>
-                <div className="homepage-top-box-right">
-                    <img alt="img-ege" src={egeImage}/>
+                <div className={bulbOn ? "on-homepage-top-box-right homepage-top-box-right" : "homepage-top-box-right"}>
+                    <div className="light">
+                        <div className="bulb" onClick={() => {setBulbOn(prev => !prev)}}>
+                            <div className="wire"></div>
+                        </div>
+                        <div className="switch">
+                        <div className="btn"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="homepage-box">

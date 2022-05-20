@@ -15,7 +15,17 @@ code {
 }
 
 html[data-theme='light'] {
-  --app-color: #00FF80;
+  --app-color: #24f88e;
   --app-secondary-color: #00ff40;
   --app-third-color: #00d4ff;
+  --app-color-theme: white;
+  --app-bg-color: #9ddde8;
+  --app-bg-color2: #c8d8e8;
+  --app-bg-color3: #d4c8e8;
+  --app-bulb-color: #00ff40;
+  --vio-color: #7460E1;
+}
+
+html {
+  background: linear-gradient(var(--app-bg-color2), var(--app-bg-color3));
 }

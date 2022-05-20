@@ -1,0 +1,53 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-05-19 21:15:50
+count workspace : /Users/samilvaliahmetov/education/programming/local-github/ege-app
+total files : 29
+total code lines : 29018
+total comment lines : 7
+total blank lines : 119
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .ts|             99|              0|             15|   0.34|
+   |           .tsx|            199|              0|             13|   0.69|
+   |           .css|            329|              0|             59|    1.1|
+   |          .json|          28320|              0|              7|     98|
+   |               |             18|              1|              5|  0.062|
+   |          .html|             12|              0|              0|  0.041|
+   |           .svg|             13|              0|              0|  0.045|
+   |            .md|             28|              6|             20|  0.096|
+   -------------------------------------------------------------------------
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 28248, comment is 0, blank is 2.
+package.json, code is 47, comment is 0, blank is 3.
+public/index.html, code is 12, comment is 0, blank is 0.
+README.md, code is 26, comment is 6, blank is 20.
+README.old.md, code is 2, comment is 0, blank is 0.
+src/App.css, code is 9, comment is 0, blank is 1.
+src/App.tsx, code is 20, comment is 0, blank is 3.
+src/components/button/index.tsx, code is 32, comment is 0, blank is 2.
+src/components/button/style.css, code is 222, comment is 0, blank is 44.
+src/components/footer/index.tsx, code is 18, comment is 0, blank is 1.
+src/components/header/details.css, code is 42, comment is 0, blank is 5.
+src/components/header/index.tsx, code is 26, comment is 0, blank is 1.
+src/components/header/style.css, code is 18, comment is 0, blank is 4.
+src/components/listOfSubjects/index.tsx, code is 21, comment is 0, blank is 3.
+src/hooks/useActions.ts, code is 7, comment is 0, blank is 1.
+src/hooks/useTypedSelector.ts, code is 3, comment is 0, blank is 1.
+src/images/arrow-header.svg, code is 13, comment is 0, blank is 0.
+src/images/ege-homepage-image.png, it is a binary file.
+src/index.css, code is 19, comment is 0, blank is 2.
+src/index.tsx, code is 19, comment is 0, blank is 1.
+src/routes/Home/index.tsx, code is 63, comment is 0, blank is 2.
+src/routes/Home/style.css, code is 19, comment is 0, blank is 3.
+src/store/action-creators/subjects.ts, code is 22, comment is 0, blank is 1.
+src/store/index.ts, code is 9, comment is 0, blank is 4.
+src/store/subjects/subjectsReducer.ts, code is 30, comment is 0, blank is 2.
+src/types/images.d.ts, code is 2, comment is 0, blank is 0.
+src/types/subjects.ts, code is 26, comment is 0, blank is 6.
+tsconfig.json, code is 25, comment is 0, blank is 2.
+===============================================================================
