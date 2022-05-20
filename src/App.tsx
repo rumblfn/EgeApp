@@ -8,9 +8,10 @@ import { Footer } from './components/footer';
 function App() {
 
   return (
-    <div className="App">
+    <div className="App" style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
       <Header/>
       <Routes>
+          <Route path="/subject/:subjectId" element={<></>} />
           <Route path="/*" element={
             <HomePage />
           } />

@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Subject } from "../../types/subjects";
+import { Link } from "react-router-dom";
 
 export const ListOfSubjects: FC = () => {
   const {loading, subjects, error} = useTypedSelector(state => state.subjects)
@@ -15,9 +16,9 @@ export const ListOfSubjects: FC = () => {
     <div className="sub-menu">
       {
           subjects.map((subject: Subject) => 
-            <p key={subject.id} className="sub-menu-link">
-                {subject.title}
-            </p>)
+            <Link to={`/subject/${subject.id}`} className="sub-menu-link" key={subject.id}>
+              {subject.title}
+            </Link>)
       }
     </div>
   );

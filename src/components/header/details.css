@@ -26,6 +26,8 @@
     z-index: 3;
     background: var(--app-color);
     background: linear-gradient(180deg, var(--app-color) 0%, var(--app-third-color) 170%);
+    display: flex;
+    flex-direction: column;
 }
 
 .sub-menu-link {

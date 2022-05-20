@@ -24,6 +24,10 @@ html[data-theme='light'] {
   --app-bg-color3: #d4c8e8;
   --app-bulb-color: #00ff40;
   --vio-color: #7460E1;
+
+  --app-link-color1: #47F68D;
+  --app-link-color2: #fcf3b0;
+  --app-link-color3: #ffdadf;
 }
 
 html {

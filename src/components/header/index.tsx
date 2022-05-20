@@ -3,6 +3,7 @@ import { ListOfSubjects } from "../listOfSubjects";
 import "./details.css";
 import "./style.css";
 import arrowHeader from "../../images/arrow-header.svg";
+import { Link } from "react-router-dom";
 
 export const Header: FC = () => {
   return (
@@ -10,16 +11,16 @@ export const Header: FC = () => {
       <div className="header-box">
       <div className="header-left">
         <div className="sub-menu-parent">
-          <div style={{display: 'flex', alignItems: 'center'}}>
+          <Link to="/" className="header-link" style={{display: 'flex', alignItems: 'center'}}>
             <img alt="arrow" style={{height: 64}} src={arrowHeader}/>
-            <p style={{marginLeft: 0}} className="header-link">Subject</p>
-          </div>
+            Subject
+          </Link>
           <ListOfSubjects />
         </div>
       </div>
       <div className="header-right">
-        <p className="header-link link-with-hover">Sign in</p>
-        <p className="header-link link-with-hover">Sign up</p>
+        <p className="header-link link-with-hover link-with-hover1">Log in</p>
+        <p className="header-link link-with-hover link-with-hover3">Sign up</p>
       </div>
     </div>
     </div>

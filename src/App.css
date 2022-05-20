@@ -9,14 +9,17 @@ a {
     color: black;
 }
 
-.link-with-hover1 {
+.link-with-hover {
+    font-weight: 700;
+    width: fit-content;
+    cursor: pointer;
     position: relative;
-    color: var(--app-third-color);
-    font-size: 28px;
+    font-size: 32px;
+    margin: 12px;
+    mix-blend-mode: exclusion;
 }
 
-.link-with-hover1::before {
-    background-color: var(--app-third-color);
+.link-with-hover::before {
     transform: scaleY(0.1);
     bottom: -0.065em;
     content: "";
@@ -28,11 +31,35 @@ a {
     transition: transform 120ms;
 }
 
-.link-with-hover1:hover {
+/* .link-with-hover:hover {
     color: var(--app-color-theme);
+} */
+
+.link-with-hover:hover::before {
+    transform: scaleY(1);
 }
 
-.link-with-hover1:hover::before {
-    transform: scaleY(1);
-    mix-blend-mode: hue;
+
+.link-with-hover1 {
+    color: var(--app-link-color1);
+}
+
+.link-with-hover1::before {
+    background-color: var(--app-link-color1);
+}
+
+.link-with-hover2 {
+    color: var(--app-link-color2);
+}
+
+.link-with-hover2::before {
+    background-color: var(--app-link-color2);
+}
+
+.link-with-hover3 {
+    color: var(--app-link-color3);
+}
+
+.link-with-hover3::before {
+    background-color: var(--app-link-color3);
 }

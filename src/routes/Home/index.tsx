@@ -4,6 +4,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { Subject } from '../../types/subjects'
 import { FC, useState } from 'react'
 import './bulb.css'
+import { Link } from 'react-router-dom'
 
 export const HomePage: FC = () => {
     const [bulbOn, setBulbOn] = useState<boolean>(true)
@@ -35,11 +36,11 @@ export const HomePage: FC = () => {
             </div>
             <div className="homepage-box">
                 <h2>Доступные модули</h2>
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column', margin: 32}}>
                     {subjects.map((subject: Subject) => 
-                        <p key={subject.id} style={{marginLeft: 24}}>
+                        <Link to={`/subject/${subject.id}`} className={`link-with-hover link-with-hover${subject.id}`} key={subject.id} style={{margin: 12}}>
                             {subject.title}
-                        </p>)
+                        </Link>)
                     }
                 </div>
             </div>
