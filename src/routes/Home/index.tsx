@@ -44,7 +44,7 @@ export const HomePage: FC = () => {
                     }
                 </div>
             </div>
-            <div className="homepage-box" style={{marginTop: 64}}>
+            <div className="homepage-box homepage-box-questions" style={{marginTop: 64}}>
                 <h2>Вопросы и ответы</h2>
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1em'}}>
                     <div className='one-question'>

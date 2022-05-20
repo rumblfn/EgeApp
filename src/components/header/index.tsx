@@ -19,8 +19,8 @@ export const Header: FC = () => {
         </div>
       </div>
       <div className="header-right">
-        <p className="header-link link-with-hover link-with-hover1">Log in</p>
-        <p className="header-link link-with-hover link-with-hover3">Sign up</p>
+        <Link to="/auth" className="header-link link-with-hover link-with-hover1">Log in</Link>
+        <Link to="/auth" className="header-link link-with-hover link-with-hover3">Sign up</Link>
       </div>
     </div>
     </div>
