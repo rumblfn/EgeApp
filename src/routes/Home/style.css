@@ -8,13 +8,20 @@
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
 
-    background: repeating-conic-gradient(from 50deg at 75% -25%, var(--app-third-color) 15%, var(--vio-color) 30%);
+    background: linear-gradient(50deg, var(--app-third-color), var(--vio-color));
 }
 
 .homepage-top-box-left p {
     font-size: 26px;
     font-weight: 500;
 }
+
+/* .homepage-top-box-left-text {
+    padding: 15px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--color-banner);
+} */
 
 .homepage-box {
     margin: 32px 0;

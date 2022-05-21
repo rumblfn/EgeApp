@@ -14,13 +14,15 @@ export const HomePage: FC = () => {
         <div className="container">
             <div className="homepage-top-box">
                 <div className="homepage-top-box-left">
-                    <h1>Приложение для подготовки к ЕГЭ</h1>
-                    <p style={{marginBottom: 6}}>
-                        Здесь вы можете получить необходимые знания для успешной сдачи ЕГЭ по математике, информатике и русскому языку.
-                    </p>
-                    <p style={{marginBottom: 0}}>
-                        Авторизованные пользователи получают доступ ко всему функционалу приложения. Выполняйте задания и получайте достижения.
-                    </p>
+                    <div className='homepage-top-box-left-text'>
+                        <h1 style={{margin: 0}}>Приложение для подготовки к ЕГЭ</h1>
+                        <p style={{marginBottom: 6}}>
+                            Здесь вы можете получить необходимые знания для успешной сдачи ЕГЭ по математике, информатике и русскому языку.
+                        </p>
+                        <p style={{marginBottom: 0}}>
+                            Авторизованные пользователи получают доступ ко всему функционалу приложения. Выполняйте задания и получайте достижения.
+                        </p>
+                    </div>
                     <ButtonHome />
                 </div>
                 <div className={bulbOn ? "on-homepage-top-box-right homepage-top-box-right" : "homepage-top-box-right"}>

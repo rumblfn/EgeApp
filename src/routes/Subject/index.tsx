@@ -1,26 +1,24 @@
-import { FC, useEffect } from "react";
-import { useActions } from "../../hooks/useActions";
+import { FC } from "react";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { SubjectTasksInfo } from "../../types/subjectsTasksInfo";
 import { useParams } from "react-router-dom";
+import { SubjectTasksInfoList } from "../../components/listOfSubjectTasksInfo";
 
 type Params = {
     subjectId: string;
-  };
+};
 
 export const SubjectPage: FC = () => {
     const params = useParams<Params>();
     const subjectId = params.subjectId || '1';
-    const {loading, subjectsTasksInfo, error} = useTypedSelector(state => state.subjectsTasksInfo)
-    const {fetchSubjectTasksInfo} = useActions()
-
-    useEffect(() => {
-        fetchSubjectTasksInfo(parseInt(subjectId))
-    }, [subjectId])
+    const {subjects} = useTypedSelector(state => state.subjects)
+    const subjectTitle = subjects.filter(i => { return i.id == subjectId })[0]?.title
 
     return (
-        <div>
-            
+        <div className="container">
+            <div style={{width: '100%'}}>
+                <h2>{subjectTitle}</h2>
+                <SubjectTasksInfoList subjectId={parseInt(subjectId)} />
+            </div>
         </div>
     )
 }
