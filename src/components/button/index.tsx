@@ -15,7 +15,7 @@ export const ButtonHome: FC = () => {
             </svg>
 
             <button style={{position: 'absolute', left: 0, bottom: 0, cursor: 'pointer'}} id="gooey-button">
-                Попробовать
+                <span style={{fontWeight: '500'}}>Let's go</span>
                 <span className="bubbles">
                     <span className="bubble"></span>
                     <span className="bubble"></span>

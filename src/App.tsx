@@ -9,7 +9,6 @@ import { AuthPage } from './routes/Auth';
 import { PrivateRoute } from './hocs/PrivateRoute';
 
 function App() {
-
   return (
     <div className="App" style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
       <Header/>
