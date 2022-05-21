@@ -1,7 +1,9 @@
+import { LogInForm } from "../../components/LogInForm"
+
 export const AuthPage = () => {
     return (
-        <div>
-            Authorization
+        <div className="container">
+            <LogInForm />
         </div>
     )
 }

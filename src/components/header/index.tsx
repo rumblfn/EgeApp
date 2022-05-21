@@ -20,7 +20,6 @@ export const Header: FC = () => {
       </div>
       <div className="header-right">
         <Link to="/auth" className="header-link link-with-hover link-with-hover1">Log in</Link>
-        <Link to="/auth" className="header-link link-with-hover link-with-hover3">Sign up</Link>
       </div>
     </div>
     </div>
