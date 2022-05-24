@@ -2,7 +2,6 @@ import { FC } from "react";
 import { ListOfSubjects } from "../listOfSubjects";
 import "./details.css";
 import "./style.css";
-import arrowHeader from "../../images/arrow-header.svg";
 import { Link } from "react-router-dom";
 
 export const Header: FC = () => {
@@ -11,8 +10,7 @@ export const Header: FC = () => {
       <div className="header-box">
       <div className="header-left">
         <div className="sub-menu-parent">
-          <Link to="/" className="header-link" style={{display: 'flex', alignItems: 'center'}}>
-            <img alt="arrow" style={{height: 64}} src={arrowHeader}/>
+          <Link to="/" className="header-link" style={{display: 'flex', alignItems: 'center', fontWeight: 500}}>
             Subject
           </Link>
           <ListOfSubjects />

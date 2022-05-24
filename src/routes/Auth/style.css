@@ -1,0 +1,40 @@
+.auth-input, .auth-button, .error-msg {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.2s;
+    background-color: var(--app-color-theme);
+    color: var(--app-link-color1);
+}
+
+.auth-input {
+    border: 2px solid var(--app-link-color1);
+}
+
+.auth-input:focus, .auth-input:hover {
+    border: 2px solid var(--vio-color);
+    box-shadow: 0 0 0 4px var(--vio-color-shadow);
+}
+
+.auth-button {
+    border: none;
+    background: var(--app-color-theme);
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    box-shadow: 7px 5px 56px -14px var(--vio-color);
+}
+   
+.auth-button:active {
+    transform: scale(0.97);
+    box-shadow: 7px 5px 56px -10px var(--vio-color);
+}
+
+.error-msg {
+    background-color: var(--error-msg-bg-color);
+    color: var(--error-msg-color);
+    vertical-align: middle;
+}

@@ -22,7 +22,7 @@
     background: #DDD;
     border-radius: 6px;
     padding: 12px 0;
-    margin: -12px 10px;
+    margin: 0px 10px;
     z-index: 3;
     background: var(--app-color);
     background: linear-gradient(180deg, var(--app-color) 0%, var(--app-third-color) 170%);

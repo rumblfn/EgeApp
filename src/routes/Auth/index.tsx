@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from 'use-debounce';
+import "./style.css";
 
 export const AuthPage = () => {
     const [loginValue, setLoginValue] = useState<string>("");
@@ -35,25 +36,28 @@ export const AuthPage = () => {
         if (register) {
             checkLoginOnServer(loginValueDebounced)
                 .then(res => setLoginIsFree(res.data['check']))
+            
+            let correct = true
 
-            loginValueDebounced.length < 5 ? 
+            if (loginValueDebounced.length < 5) {
                 setError("login must contain at least 5 characters")
-                : setError("")
+                correct = false
+            }
+
+            if (passwordDebounced.length < 8) {
+                setError("password must contain at least 8 characters")
+                correct = false
+            }
+
+            if (correct) {
+                setError("")
+            }
+
         } else {
             setLoginIsFree(true)
             setError("")
         }
-    }, [register, loginValueDebounced])
-
-    useEffect(() => {
-        if (register) {
-            passwordDebounced.length < 8 ? 
-                setError("password must contain at least 8 characters")
-                : setError("")
-        } else {
-            setError("")
-        }
-    }, [register, passwordDebounced])
+    }, [register, loginValueDebounced, passwordDebounced])
 
     const handleAuth = () => {
         if (register) {
@@ -73,7 +77,9 @@ export const AuthPage = () => {
         <div className="container">
             <div style={{width: '100%'}}>
                 <div style={{display: 'flex', flexDirection: 'column', maxWidth: 500, margin: '64px auto'}}>
-
+                    <h2 style={{margin: '10px 0', color: 'var(--app-link-color1)'}}>
+                        {register ? "Registration" : "Authorization"}
+                    </h2>
                     <input type="text" className="auth-input" 
                         value={loginValue} 
                         placeholder={register ? "type your new login" : "type your email or login"}
@@ -84,8 +90,6 @@ export const AuthPage = () => {
                         placeholder={register ? "and here, type your new password" : "password"}
                         onChange={e => setPassword(e.target.value)}
                     />
-                    {error}
-                    {!loginIsFree && "Login exist"}
                     <button onClick={handleAuth} className="auth-button">
                         {
                             register ? "Sign up" : "Log in"
@@ -112,6 +116,18 @@ export const AuthPage = () => {
                                     Sign up
                             </span>
                         </p>
+                    }
+                    {
+                        !loginIsFree &&
+                            <div className="error-msg">
+                                Login exist
+                            </div>
+                    }
+                    {
+                        error &&
+                            <div className="error-msg">
+                                {error}
+                            </div>
                     }
                 </div>
             </div>

@@ -27,11 +27,14 @@ html[data-theme='light'] {
   --app-bg-color3: #d4c8e8;
   --app-bulb-color: #00ff40;
   --vio-color: #7460E1;
+  --vio-color-shadow: #9281ee;
   --color-banner: #9480FF;
 
   --app-link-color1: #2800FF;
   --app-link-color2: #fcf3b0;
   --app-link-color3: #ffdadf;
+  --error-msg-bg-color: #FFD2D2;
+  --error-msg-color: #D8000C;
 }
 
 html {
