@@ -5,7 +5,9 @@ import { useDebounce } from 'use-debounce';
 export const AuthPage = () => {
     const [loginValue, setLoginValue] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
     const [loginValueDebounced] = useDebounce(loginValue, 500);
+    const [passwordDebounced] = useDebounce(password, 500);
 
     const [loginIsFree, setLoginIsFree] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
@@ -15,26 +17,55 @@ export const AuthPage = () => {
         return await axios.get(`http://192.168.1.61:8888/user/checkLogin/?login=${login}`)
     }
 
-    useEffect(() => {
-        if (loginValue.length < 5) {
-            setError("the login must contain at least 5 characters")
-        }
-    }, [loginValue])
+    async function signUp() {
+        return await axios.post(`http://192.168.1.61:8888/auth/register`, {
+            login: loginValue,
+            password: password
+        })
+    }
+
+    async function logIn() {
+        return await axios.post(`http://192.168.1.61:8888/auth/login`, {
+            login: loginValue,
+            password: password
+        })
+    }
 
     useEffect(() => {
-        if (password.length < 8) {
-            setError("the password must contain at least 8 characters")
+        if (register) {
+            checkLoginOnServer(loginValueDebounced)
+                .then(res => setLoginIsFree(res.data['check']))
+
+            loginValueDebounced.length < 5 ? 
+                setError("login must contain at least 5 characters")
+                : setError("")
+        } else {
+            setLoginIsFree(true)
+            setError("")
         }
-    }, [password])
+    }, [register, loginValueDebounced])
 
     useEffect(() => {
-        checkLoginOnServer(loginValueDebounced)
-            .then(res => setLoginIsFree(res.data['check']))
-    }, [loginValueDebounced])
+        if (register) {
+            passwordDebounced.length < 8 ? 
+                setError("password must contain at least 8 characters")
+                : setError("")
+        } else {
+            setError("")
+        }
+    }, [register, passwordDebounced])
 
     const handleAuth = () => {
-        if (!error) {
-            
+        if (register) {
+            if (loginValue.length >= 5 && password.length >= 8) {
+                signUp().then(res => console.log(res))
+            }
+        } else {
+            if (loginValue && password) {
+                logIn().then(res => console.log(res))
+            } else {
+                setError("fields can not be empty")
+            }
         }
     }
 
@@ -42,6 +73,7 @@ export const AuthPage = () => {
         <div className="container">
             <div style={{width: '100%'}}>
                 <div style={{display: 'flex', flexDirection: 'column', maxWidth: 500, margin: '64px auto'}}>
+
                     <input type="text" className="auth-input" 
                         value={loginValue} 
                         placeholder={register ? "type your new login" : "type your email or login"}
@@ -52,13 +84,16 @@ export const AuthPage = () => {
                         placeholder={register ? "and here, type your new password" : "password"}
                         onChange={e => setPassword(e.target.value)}
                     />
+                    {error}
+                    {!loginIsFree && "Login exist"}
                     <button onClick={handleAuth} className="auth-button">
                         {
                             register ? "Sign up" : "Log in"
                         }
                     </button>
-                {
-                    register ? 
+
+                    {
+                        register ? 
                         <p style={{fontSize: 18}}>
                             <span style={{marginRight: 12}}>
                                 Already have an account?
@@ -77,7 +112,7 @@ export const AuthPage = () => {
                                     Sign up
                             </span>
                         </p>
-                }
+                    }
                 </div>
             </div>
         </div>
