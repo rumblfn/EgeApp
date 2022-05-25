@@ -1,3 +1,4 @@
+import { userReducer } from './reducers/userReducer';
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { combineReducers } from "redux";
@@ -6,7 +7,8 @@ import { subjectsTasksInfoReducer } from "./reducers/subjectsTasksInfoReducer";
 
 const rootReducer = combineReducers({
     subjects: subjectsReducer,
-    subjectsTasksInfo: subjectsTasksInfoReducer
+    subjectsTasksInfo: subjectsTasksInfoReducer,
+    user: userReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

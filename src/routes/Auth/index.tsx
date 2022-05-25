@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from 'use-debounce';
 import "./style.css";
+import { useActions } from "../../hooks/useActions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const AuthPage = () => {
+    const {setUser} = useActions()
     const [loginValue, setLoginValue] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -14,19 +17,15 @@ export const AuthPage = () => {
     const [error, setError] = useState<string>("");
     const [register, setRegister] = useState(false);
 
+    const userData = useTypedSelector<any>(state => state.user)
+    console.log(userData)
+
     async function checkLoginOnServer(login: string) {
         return await axios.get(`http://192.168.1.61:8888/user/checkLogin/?login=${login}`)
     }
 
     async function signUp() {
         return await axios.post(`http://192.168.1.61:8888/auth/register`, {
-            login: loginValue,
-            password: password
-        })
-    }
-
-    async function logIn() {
-        return await axios.post(`http://192.168.1.61:8888/auth/login`, {
             login: loginValue,
             password: password
         })
@@ -66,7 +65,7 @@ export const AuthPage = () => {
             }
         } else {
             if (loginValue && password) {
-                logIn().then(res => console.log(res))
+                setUser(loginValue, password)
             } else {
                 setError("fields can not be empty")
             }

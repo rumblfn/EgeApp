@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header';
@@ -6,7 +6,7 @@ import { HomePage } from './routes/Home';
 import { Footer } from './components/footer';
 import { SubjectPage } from './routes/Subject';
 import { AuthPage } from './routes/Auth';
-import { PrivateRoute } from './hocs/PrivateRoute';
+import { useSelector } from 'react-redux';
 
 function App() {
   return (

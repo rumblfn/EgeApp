@@ -23,7 +23,7 @@ export const userReducer = (state = initialState, action: UserAction): UserState
             return {
                 loading: false,
                 error: null,
-                user: action.payload
+                user: {...action.payload}
             }
         case UserActionTypes.FETCH_USER_ERROR:
             return {

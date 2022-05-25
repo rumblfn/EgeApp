@@ -4,7 +4,7 @@ export enum UserActionTypes {
     FETCH_USER_ERROR = "FETCH_USER_ERROR",
 }
 
-interface UserUserState {
+export interface UserUserState {
     email: null | string;
     karma: null | string;
     login: null | string;
