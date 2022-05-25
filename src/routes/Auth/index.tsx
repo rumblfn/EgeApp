@@ -3,10 +3,12 @@ import axios from "axios";
 import { useDebounce } from 'use-debounce';
 import "./style.css";
 import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useNavigate } from "react-router-dom";
 
 export const AuthPage = () => {
-    const {setUser} = useActions()
+    const navigate = useNavigate();
+
+    const {setUser} = useActions();
     const [loginValue, setLoginValue] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -17,8 +19,8 @@ export const AuthPage = () => {
     const [error, setError] = useState<string>("");
     const [register, setRegister] = useState(false);
 
-    const userData = useTypedSelector<any>(state => state.user)
-    console.log(userData)
+    // const userData = useTypedSelector<any>(state => state.user);
+    const [registerIsLoading, setRegisterIsLoading] = useState(false);
 
     async function checkLoginOnServer(login: string) {
         return await axios.get(`http://192.168.1.61:8888/user/checkLogin/?login=${login}`)
@@ -61,7 +63,13 @@ export const AuthPage = () => {
     const handleAuth = () => {
         if (register) {
             if (loginValue.length >= 5 && password.length >= 8) {
-                signUp().then(res => console.log(res))
+                setRegisterIsLoading(true)
+                signUp().then(res => {
+                    setRegisterIsLoading(false)
+                    if (res.data.status) {
+                        setRegister(false)
+                    }
+                })
             }
         } else {
             if (loginValue && password) {
@@ -89,7 +97,9 @@ export const AuthPage = () => {
                         placeholder={register ? "and here, type your new password" : "password"}
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <button onClick={handleAuth} className="auth-button">
+                    <button onClick={handleAuth} className="auth-button"
+                        style={{backgroundColor: registerIsLoading ? "var(--app-link-color2)" : "var(--app-color-theme)"}}
+                    >
                         {
                             register ? "Sign up" : "Log in"
                         }
