@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from 'use-debounce';
-import "./style.css";
 import { useActions } from "../../hooks/useActions";
 import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import "./style.css";
 
 export const AuthPage = () => {
     const navigate = useNavigate();
+    const isUserAuthed = useTypedSelector<any>(state => state.user.user.statusUser);
 
     const {setUser} = useActions();
     const [loginValue, setLoginValue] = useState<string>("");
+    const [tryedTologin, setTryedTologin] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("");
 
     const [loginValueDebounced] = useDebounce(loginValue, 500);
@@ -19,7 +22,6 @@ export const AuthPage = () => {
     const [error, setError] = useState<string>("");
     const [register, setRegister] = useState(false);
 
-    // const userData = useTypedSelector<any>(state => state.user);
     const [registerIsLoading, setRegisterIsLoading] = useState(false);
 
     async function checkLoginOnServer(login: string) {
@@ -32,6 +34,12 @@ export const AuthPage = () => {
             password: password
         })
     }
+
+    useEffect(() => {
+        if (isUserAuthed && tryedTologin) {
+            navigate('/profile')
+        }
+    }, [isUserAuthed, tryedTologin])
 
     useEffect(() => {
         if (register) {
@@ -74,6 +82,7 @@ export const AuthPage = () => {
         } else {
             if (loginValue && password) {
                 setUser(loginValue, password)
+                setTryedTologin(true)
             } else {
                 setError("fields can not be empty")
             }

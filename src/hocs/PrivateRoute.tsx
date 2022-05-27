@@ -1,10 +1,14 @@
-import { Navigate, Route, RouteProps } from "react-router-dom";
+import { Navigate, RouteProps } from 'react-router';
 
-interface Props extends RouteProps {
-    isAuth: boolean;
+export type ProtectedRouteProps = {
+  isAuthenticated: boolean;
+  authenticationPath: string;
+} & RouteProps;
 
-}
-
-export const PrivateRoute = ({isAuth, ...routeProps}: Props) => {
-    return isAuth ? <Route { ...routeProps }/> : <Navigate to='/'/>
-}
+export default function ProtectedRoute({isAuthenticated, authenticationPath, ...routeProps}: ProtectedRouteProps) {
+  if(isAuthenticated) {
+    return <div {...routeProps} />;
+  } else {
+    return <Navigate to={{ pathname: authenticationPath }} />;
+  }
+};

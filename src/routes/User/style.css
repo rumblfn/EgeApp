@@ -1,0 +1,112 @@
+.profileTopBox {
+    margin-top: 64px;
+    display: grid;
+    border-radius: 12px;
+    grid-template-columns: 1fr 5fr;
+    gap: 12px;
+}
+
+.profileImageBox {
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    gap: 12px;
+    height: fit-content;
+}
+
+.profileImage {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.profileDescriptionBox {
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px;
+    height: fit-content;
+}
+
+.profileDescriptionBox h3 {
+    margin: 0;
+}
+
+.profileDescriptionBox p {
+    margin: 8px;
+}
+
+
+.profile-image-upload-button {
+    align-items: center;
+    background-image: linear-gradient(144deg,var(--vio-color), var(--app-link-color1) 50%, var(--app-third-color));
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: var(--app-black);
+    display: flex;
+    font-family: sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 1em;
+    width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+   }
+
+   .profile-image-remove-button {
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        border: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+        
+   }
+
+   .profile-image-remove-button:hover {
+    box-shadow: 0 0 0 4px var(--app-third-color);
+}
+   
+   .profile-image-upload-buttonprofile-image-upload-button:active,
+   .profile-image-upload-button:hover {
+    outline: 0;
+   }
+   
+   .profile-image-upload-button span {
+    background-color: var(--app-upload-button);
+    padding: 8px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+    color: var(--app-link-color1);
+    font-weight: 700;
+   }
+   
+   .profile-image-upload-button:hover span {
+    background: none;
+    color: var(--app-color-theme)
+   }
+   
+   .profile-image-upload-button:active, .profile-image-remove-button:active {
+    transform: scale(0.9);
+   }
+
+.profileAboutBox {
+    
+}

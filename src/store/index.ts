@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import { subjectsReducer } from "./reducers/subjectsReducer";
 import { subjectsTasksInfoReducer } from "./reducers/subjectsTasksInfoReducer";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
     subjects: subjectsReducer,
@@ -14,4 +15,4 @@ const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>
 
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

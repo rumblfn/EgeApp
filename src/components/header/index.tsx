@@ -17,6 +17,7 @@ export const Header: FC = () => {
         </div>
       </div>
       <div className="header-right">
+        <Link to="/profile" style={{marginRight: 0}} className="header-link link-with-hover link-with-hover1">Profile</Link>
         <Link to="/auth" className="header-link link-with-hover link-with-hover1">Log in</Link>
       </div>
     </div>

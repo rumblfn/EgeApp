@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
-import { UserAction } from '../../types/user';
-import { UserActionTypes, UserUserState } from '../../types/user';
+import { UserAction, SetUserAboutAction } from '../../types/user';
+import { UserActionTypes } from '../../types/user';
+
 import axios from 'axios';
 
 
@@ -23,6 +24,26 @@ export const setUser = (loginValue: string, password: string) => {
                 type: UserActionTypes.FETCH_USER_ERROR, 
                 payload: 'error'
             })
+        }
+    }
+}
+
+export const setUserAbout = (login: string, text: string) => {
+    return async (dispatch: Dispatch<SetUserAboutAction>) => {
+        try {
+            const response = await axios.post(`http://192.168.1.61:8888/user/editAbout`, {
+                login,
+                text
+            })
+            console.log(response)
+            if (response.data.status) {
+                dispatch({
+                    type: UserActionTypes.SET_USER_ABOUT, 
+                    payload: text
+                })
+            }
+        } catch (e) {
+            throw console.error('errors on changing status, try later');
         }
     }
 }

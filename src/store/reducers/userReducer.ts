@@ -5,7 +5,10 @@ const initialState: UserState = {
         email: null,
         karma: null,
         login: null,
-        statusUser: false
+        statusUser: false,
+        profileImg: null,
+        profileBannerImg: null,
+        status: ''
     },
     loading: false,
     error: null
@@ -23,11 +26,20 @@ export const userReducer = (state = initialState, action: UserAction): UserState
             return {
                 loading: false,
                 error: null,
-                user: {...action.payload}
+                user: {...action.payload, statusUser: true}
             }
         case UserActionTypes.FETCH_USER_ERROR:
             return {
                 ...state,
+                loading: true,
+                error: action.payload
+            }
+        case UserActionTypes.SET_USER_ABOUT:
+            return {
+                user: {
+                    ...state.user,
+                    status: action.payload,
+                },
                 loading: true,
                 error: action.payload
             }

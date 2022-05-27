@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useParams } from "react-router-dom";
-import { SubjectTasksInfoList } from "../../components/listOfSubjectTasksInfo";
 
 type Params = {
     subjectId: string;
+    taskId: string;
 };
 
-export const SubjectPage: FC = () => {
+export const SubjectTaskPage: FC = () => {
     const params = useParams<Params>();
+    console.log(params)
     const subjectId = params.subjectId || '1';
     const {subjects} = useTypedSelector(state => state.subjects)
     const subjectTitle = subjects.filter(i => { return i.id == subjectId })[0]?.title
@@ -17,7 +18,7 @@ export const SubjectPage: FC = () => {
         <div className="container">
             <div style={{width: '100%', marginBottom: 64}}>
                 <h2>{subjectTitle}</h2>
-                <SubjectTasksInfoList subjectId={parseInt(subjectId)} />
+                {/* <div dangerouslySetInnerHTML={{ __html: "<h1>test 2</h1>" }} /> */}
             </div>
         </div>
     )
