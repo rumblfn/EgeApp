@@ -11,7 +11,7 @@ export const setUser = (loginValue: string, password: string) => {
             dispatch({
                 type: UserActionTypes.FETCH_USER
             })
-            const response = await axios.post(`http://192.168.1.61:8888/auth/login`, {
+            const response = await axios.post(`http://localhost:8888/auth/login`, {
                 login: loginValue,
                 password: password
             })
@@ -31,7 +31,7 @@ export const setUser = (loginValue: string, password: string) => {
 export const setUserAbout = (login: string, text: string) => {
     return async (dispatch: Dispatch<SetUserAboutAction>) => {
         try {
-            const response = await axios.post(`http://192.168.1.61:8888/user/editAbout`, {
+            const response = await axios.post(`http://localhost:8888/user/editAbout`, {
                 login,
                 text
             })

@@ -25,11 +25,11 @@ export const AuthPage = () => {
     const [registerIsLoading, setRegisterIsLoading] = useState(false);
 
     async function checkLoginOnServer(login: string) {
-        return await axios.get(`http://192.168.1.61:8888/user/checkLogin/?login=${login}`)
+        return await axios.get(`http://localhost:8888/user/checkLogin/?login=${login}`)
     }
 
     async function signUp() {
-        return await axios.post(`http://192.168.1.61:8888/auth/register`, {
+        return await axios.post(`http://localhost:8888/auth/register`, {
             login: loginValue,
             password: password
         })

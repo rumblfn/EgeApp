@@ -10,6 +10,7 @@ import ProtectedRoute from './hocs/PrivateRoute';
 import { UserPage } from './routes/User';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { SubjectTaskPage } from './routes/SubjectTask';
+import { NewArticlePage } from './routes/newArticle';
 
 function App() {
   const isUserAuthed = useTypedSelector<any>(state => state.user.user.statusUser);
@@ -19,6 +20,14 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/auth" element={<AuthPage/>} />
+        <Route path="/new" element={
+          <ProtectedRoute 
+            isAuthenticated={isUserAuthed}
+            authenticationPath="/auth"
+          >
+            <NewArticlePage/>
+          </ProtectedRoute>
+        } />
         <Route path="/profile" element={
           <ProtectedRoute 
             isAuthenticated={isUserAuthed}

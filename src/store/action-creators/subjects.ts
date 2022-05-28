@@ -9,7 +9,7 @@ export const fetchSubjects = () => {
             dispatch({
                 type: SubjectsActionTypes.FETCH_SUBJECTS
             })
-            const response = await axios.get("http://192.168.1.61:8888/subject/getSubjects")
+            const response = await axios.get("http://localhost:8888/subject/getSubjects")
             dispatch({
                 type: SubjectsActionTypes.FETCH_SUBJECTS_SUCCESS, 
                 payload: response.data

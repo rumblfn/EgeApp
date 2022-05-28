@@ -33,8 +33,9 @@ html[data-theme='light'] {
   --app-black: black;
 
   --app-link-color1: #2800FF;
-  --app-upload-button: #c0bcde;
-  --app-link-color0: #000000;
+  --app-upload-button: #d2d1da;
+  --app-bg-instruments: #ffffffac;
+  --app-link-color0: #4c394f;
   --app-link-color2: #ff7700;
   --app-link-color3: #ff0022;
   --app-link-color4: #ae00ff;

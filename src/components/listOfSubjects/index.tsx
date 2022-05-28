@@ -9,7 +9,9 @@ export const ListOfSubjects: FC = () => {
   const {fetchSubjects} = useActions()
 
   useEffect(() => {
-    fetchSubjects()
+    if (!subjects.length) {
+      fetchSubjects()
+    }
   }, []);
 
   return (
