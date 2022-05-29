@@ -9,7 +9,6 @@ type Params = {
 
 export const SubjectTaskPage: FC = () => {
     const params = useParams<Params>();
-    console.log(params)
     const subjectId = params.subjectId || '1';
     const {subjects} = useTypedSelector(state => state.subjects)
     const subjectTitle = subjects.filter(i => { return i.id == subjectId })[0]?.title

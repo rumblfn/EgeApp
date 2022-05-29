@@ -1,0 +1,22 @@
+.article-template {
+    position: relative;
+    background-color: var(--app-color-theme);
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 86px;
+}
+
+.article-template-publish {
+    width: fit-content;
+    position: absolute;
+    right: 32px;
+    bottom: 24px;
+}
+
+.article-template-save {
+    width: fit-content;
+    position: absolute;
+    left: 32px;
+    bottom: 24px;
+}

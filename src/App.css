@@ -90,3 +90,17 @@ a {
 .link-with-hover0::before {
     background-color: var(--app-link-color0);
 }
+
+select {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid #777;
+    padding: 0.25em 0.5em;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    line-height: inherit;
+    border-radius: 4px;
+}

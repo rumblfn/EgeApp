@@ -1,0 +1,54 @@
+.input-default {
+    width: 100%;
+    border: none;
+    padding: 8px 16px;
+    outline: none;
+}
+
+.input-heading {
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 2px solid grey;
+}
+
+.input-simple-text {
+    font-size: 16px;
+}
+
+.input-quote {
+    background-color: rgb(204, 222, 222);
+    padding: 18px;
+    font-size: 20px;
+    border-left: 6px solid grey;
+    color: #303030;
+}
+
+.action-box {
+    position: relative;
+}
+
+.action-box-simple-text {
+    padding: 16px;
+    border-bottom: 1px solid grey;
+}
+
+.action-box-quote {
+    margin: 16px 0;
+}
+
+.action-box-rm {
+    opacity: 0;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    cursor: pointer;
+    transition: all 120ms;
+}
+
+.action-box:hover .action-box-rm {
+    opacity: 1;
+}
+
+.action-box-rm:active {
+    transform: scale(0.9);
+}

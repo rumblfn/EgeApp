@@ -35,7 +35,6 @@ export const setUserAbout = (login: string, text: string) => {
                 login,
                 text
             })
-            console.log(response)
             if (response.data.status) {
                 dispatch({
                     type: UserActionTypes.SET_USER_ABOUT, 
