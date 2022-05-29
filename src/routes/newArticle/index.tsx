@@ -7,9 +7,13 @@ export const NewArticlePage:FC = () => {
     const [actions, setActions] = useState<ArticleAction[]>([
         {
             type: ArticleActionTypes.HEADING,
-            content: ''
+            content: '',
+            language: null,
+            linkTitle: null
         }
     ]);
+
+    console.log(actions)
 
     return (
         <div style={{minHeight: '100vh'}}>

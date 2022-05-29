@@ -15,56 +15,78 @@ export enum ArticleActionTypes {
 export interface HeadingAction {
     type: ArticleActionTypes.HEADING;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface QuoteAction {
     type: ArticleActionTypes.QUOTE;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface ImageAction {
     type: ArticleActionTypes.IMAGE;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface LinkAction {
     type: ArticleActionTypes.LINK;
+    linkTitle: string | null;
     content: string | null;
+    language: null;
 }
 
 export interface TextAction {
     type: ArticleActionTypes.TEXT;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface ItalicTextAction {
     type: ArticleActionTypes.ITALIC_TEXT;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface CodeTextAction {
     type: ArticleActionTypes.CODE_TEXT;
+    language: string | null;
     content: string | null;
+    linkTitle: string | null;
 }
 
 export interface BoldTextAction {
     type: ArticleActionTypes.BOLD_TEXT;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface FormulaAction {
     type: ArticleActionTypes.FORMULA;
     content: string | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface OlListAction {
     type: ArticleActionTypes.OL_LIST;
     content: string[] | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export interface UlListAction {
     type: ArticleActionTypes.UL_LIST | string;
     content: string[] | null;
+    language: null;
+    linkTitle: string | null;
 }
 
 export type ArticleAction = 

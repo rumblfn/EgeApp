@@ -1,7 +1,10 @@
 import { FC, useState } from "react";
 import { ArticleAction, ArticleActionTypes } from "../../types/article";
-
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import './style.css';
+
+var Latex = require('react-latex');
 
 interface Props {
     index: number;
@@ -16,6 +19,8 @@ interface Props {
 export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, index}) => {
     const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>('');
+    const [lang, setLang] = useState<string | null>(action.language);
+    const [linkTitle, setLinkTitle] = useState<string | null>(action.linkTitle);
 
     const removeAction = () => {
         setActions([
@@ -27,6 +32,28 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
     const handleText = (text: string) => {
         const currentAction = actions[index]
         currentAction.content = text;
+
+        setActions([
+            ...actions.slice(0, index),
+            currentAction,
+            ...actions.slice(index + 1, actions.length),
+        ])
+    }
+
+    const handleLang = (text: string) => {
+        const currentAction = actions[index]
+        currentAction.language = text;
+
+        setActions([
+            ...actions.slice(0, index),
+            currentAction,
+            ...actions.slice(index + 1, actions.length),
+        ])
+    }
+
+    const handleLinkTitle = (linkTitle: string) => {
+        const currentAction = actions[index]
+        currentAction.linkTitle = linkTitle;
 
         setActions([
             ...actions.slice(0, index),
@@ -76,8 +103,45 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
             )
         case ArticleActionTypes.LINK:
             return (
-                <div>
-            
+                <div className="action-box">
+                    <div className="action-box-simple-text" onClick={() => {setAboutEditorMode(true)}}>
+                        {
+                            action.content ?
+                                <div>
+                                    <a style={{color: 'blue'}} href={`${action.content}`}>{action.linkTitle}</a>
+                                </div>
+                                : <span style={{fontSize: 16, color: 'grey'}}>Click here to change</span>
+                        }
+                    </div>
+                    {
+                        aboutEditorMode ?
+                        <div>
+                            <input
+                                onBlur={(e) => {
+                                    handleText(e.target.value)
+                                }}
+                                className="input-default" 
+                                type="text" 
+                                placeholder="Type your link here"
+                                onChange={e => setInputValue(e.target.value)}
+                                value={inputValue ? inputValue : action.content ? action.content : ''}
+                            />
+                            <input
+                                onBlur={(e) => {
+                                    handleLinkTitle(e.target.value)
+                                }}
+                                className="input-default" 
+                                type="text" 
+                                placeholder="Type your title for link here"
+                                onChange={e => setLinkTitle(e.target.value)}
+                                value={linkTitle ? linkTitle : action.linkTitle ? action.linkTitle : ''}
+                            />
+                        </div>
+                        : null
+                    }
+                    <i className="fa-solid fa-xmark action-box-rm"
+                        onClick={removeAction}
+                    />
                 </div>
             )
         case ArticleActionTypes.TEXT:
@@ -148,13 +212,25 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
                     <div className="action-box-simple-text" onClick={() => {setAboutEditorMode(true)}}>
                         {
                             action.content ?
-                                <pre><code>{action.content}</code></pre>
+                                <SyntaxHighlighter language={lang ? lang : ''} style={docco}>
+                                    {action.content}
+                                </SyntaxHighlighter>
                                 : <span style={{fontSize: 16, color: 'grey'}}>Click here to change</span>
                         }
                     </div>
                     {
                         aboutEditorMode ?
                         <div>
+                            <input
+                                onBlur={(e) => {
+                                    handleLang(e.target.value)
+                                }}
+                                className="input-default" 
+                                type="text" 
+                                placeholder="Type your lang here"
+                                onChange={e => setLang(e.target.value)}
+                                value={lang ? lang : action.language ? action.language : ''}
+                            />
                             <textarea
                                 className="auth-input" 
                                 style={{resize: 'none', minHeight: 150}}
@@ -206,8 +282,36 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
             )
         case ArticleActionTypes.FORMULA:
             return (
-                <div>
-                        
+                <div className="action-box">
+                    <div className="action-box-simple-text" onClick={() => {setAboutEditorMode(true)}}>
+                        {
+                            action.content ?
+                                <div>
+                                    <Latex>{action.content}</Latex>
+                                </div>
+                            : <span style={{fontSize: 16, color: 'grey'}}>Click here to change</span>
+                        }
+                    </div>
+                    {
+                        aboutEditorMode ?
+                        <div>
+                            <textarea
+                                placeholder="We are using Latex syntax"
+                                className="auth-input" 
+                                style={{resize: 'none', minHeight: 150}}
+                                onBlur={(e) => {
+                                    setAboutEditorMode(true); 
+                                    handleText(e.target.value)
+                                }}
+                                onChange={e => setInputValue(e.target.value)}
+                                defaultValue={inputValue ? inputValue : typeof action.content === 'string' ? action.content : ''}
+                            />
+                        </div>
+                        : null
+                    }
+                    <i className="fa-solid fa-xmark action-box-rm"
+                        onClick={removeAction}
+                    />
                 </div>
             )
         case ArticleActionTypes.OL_LIST:

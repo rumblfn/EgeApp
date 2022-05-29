@@ -60,7 +60,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.HEADING,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -73,7 +75,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.QUOTE,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -86,7 +90,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.IMAGE,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -99,7 +105,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.LINK,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -112,7 +120,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.TEXT,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -125,7 +135,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.ITALIC_TEXT,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -138,7 +150,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.CODE_TEXT,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -151,7 +165,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.BOLD_TEXT,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -164,7 +180,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.FORMULA,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -177,7 +195,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.OL_LIST,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}
@@ -190,7 +210,9 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                             ...prevState,
                             {
                                 type: ArticleActionTypes.UL_LIST,
-                                content: null
+                                content: null,
+                                language: null,
+                                linkTitle: null
                             }
                         ])
                     }}

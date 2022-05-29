@@ -5,6 +5,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { BrowserRouter } from 'react-router-dom';
+import { MathJaxContext } from 'better-react-mathjax';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <MathJaxContext>
+          <App />
+       </MathJaxContext>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
