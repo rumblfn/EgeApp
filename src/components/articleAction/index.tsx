@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import { ArticleAction, ArticleActionTypes } from "../../types/article";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -16,11 +16,40 @@ interface Props {
     => void;
 }
 
+export const encodeImageFileAsURL = (element: any, setter: any) => {
+    try {
+        let file = element;
+        file = element.files[0];
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            setter(reader.result)
+        }
+        reader.readAsDataURL(file);
+    } catch (err) {
+        alert('file reader error')
+}}
+
+export const checkFileTypeAndSize = (e: any, type: string) => {
+    let file = e.target.files[0];
+    if (file.size > 10000000) {
+        alert('Вес файла больше 10мб');
+        return false;
+    }
+    if (file.type.split('/')[0] !== type) {
+        alert('Неверный тип файла');
+        return false;
+    }
+    return true;
+}
+
 export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, index}) => {
     const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>('');
     const [lang, setLang] = useState<string | null>(action.language);
     const [linkTitle, setLinkTitle] = useState<string | null>(action.linkTitle);
+
+    const [imageData, setImageData] = useState<string | boolean>(`${action.content}`);
+    const imageUploadedRef = useRef(null);
 
     const removeAction = () => {
         setActions([
@@ -62,6 +91,21 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
         ])
     }
 
+    const handleUploadedFileImage = (e: any) => {
+        if (!e.target.files.length) {
+            return
+        }
+        const check = checkFileTypeAndSize(e, 'image');
+        if (check) {
+            encodeImageFileAsURL(e.target, setImageDataFull);
+        }
+    }
+
+    const setImageDataFull = (data: string) => {
+        setImageData(data)
+        handleText(data)
+    }
+
     switch (action.type) {
         case ArticleActionTypes.HEADING:
             return (
@@ -97,8 +141,21 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
             )
         case ArticleActionTypes.IMAGE:
             return (
-                <div className="action-box">
-        
+                <div className="action-box" style={{marginTop: 16}}>
+                    <input id="file-upload" type="file" className="file-uploader"
+                        onChange={e => {handleUploadedFileImage(e)}}/>
+                    {imageData ? 
+                    <div className='audio-player-container'>
+                        <img ref={imageUploadedRef} 
+                            style={{maxWidth: '100%', marginTop: 16}}
+                            className='player-container__content' 
+                            src={typeof imageData === 'boolean' ? '' : imageData} alt="картинка"
+                        />
+                    </div>
+                    : null}
+                    <i className="fa-solid fa-xmark action-box-rm"
+                        onClick={removeAction}
+                    />
                 </div>
             )
         case ArticleActionTypes.LINK:
