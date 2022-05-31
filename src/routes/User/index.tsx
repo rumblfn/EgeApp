@@ -1,11 +1,14 @@
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import profileImage from "../../images/plug.png"
 import trash from "../../images/trash.png"
 import { UserUserState } from '../../types/user';
 import { AddArticleBox } from "../../components/addArticleBox";
+import encodeImageFileAsURL from "../../components/static/encodeImageFileAsURL";
+import { checkFileTypeAndSize } from "../../components/articleAction";
+import { ArticleType } from "../../types/article";
 import './style.css';
 
 export const UserPage:FC = () => {
@@ -13,8 +16,17 @@ export const UserPage:FC = () => {
     const [msg, setMsg] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [aboutUser, setAboutUser] = useState<string>(userData.status);
-    const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(false)
-    const {setUserAbout} = useActions();
+    const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(false);
+    const [userImg, setUserImg] = useState<string>(userData.profileImg ? userData.profileImg : '');
+    const [type, setType] = useState<ArticleType>('draft');
+
+    const {setUserAbout, setUserImgStore, removeUserImgStore} = useActions();
+
+    useEffect(() => {
+        if (userData.login && !userImg.endsWith('.jpg')) {
+            setUserImgStore(userData.login, userImg)
+        }
+    }, [userImg])
 
     async function handleEmail () {
         if (email) {
@@ -27,8 +39,25 @@ export const UserPage:FC = () => {
     }
 
     const saveUserAbout = () => {
-        if (userData.login !== null) {
+        if (userData.login) {
             setUserAbout(userData.login, aboutUser)
+        }
+    }
+
+    const removeUserImg = () => {
+        if (userData.login) {
+            setUserImg('')
+            removeUserImgStore(userData.login)
+        }
+    }
+
+    function handleUploadedFileImage (e: any) {
+        if (!e.target.files.length) {
+            return
+        }
+        const check = checkFileTypeAndSize(e, 'image');
+        if (check) {
+            encodeImageFileAsURL(e, setUserImg);
         }
     }
 
@@ -37,19 +66,28 @@ export const UserPage:FC = () => {
             <div className="profileTopBox">
                 <div className="columnBoxes">
                     <div className="profileImageBox">
-                        <img className="profileImage" src={profileImage} alt="profileImage"/>
+                        <img className="profileImage" src={
+                            userImg.endsWith('.jpg') ? 
+                                `http://localhost:8888/uploads/user_imgs/${userImg}` : userImg 
+                            ? userImg : profileImage} 
+                            alt="profileImage"
+                        />
                         <div style={{display: 'flex', gap: 8}}>
-                            <button className="profile-image-upload-button">
+                            <label className="profile-image-upload-button" htmlFor="file-upload">
                                 <span className="text">Upload image</span>
-                            </button>
+                            </label>
+                            <input type="file"
+                                id="file-upload" 
+                                style={{display: 'none'}} 
+                                onChange={e => {handleUploadedFileImage(e)
+                            }}/>
                             {
                                 userData.profileImg ?
-                                null
-                                : <button className="profile-image-remove-button">
+                                <button className="profile-image-remove-button" onClick={removeUserImg}>
                                     <span className="text">
                                         <img style={{width: 24, marginTop: 4}} src={trash} alt="remove"/>
                                     </span>
-                                </button>
+                                </button> : null
                             }
                         </div>
                     </div>
@@ -137,7 +175,23 @@ export const UserPage:FC = () => {
                             }
                         </div>
                     </div>
-    
+                    <div className="profile-content-box">
+                        <h4 style={{margin: 0}}>Your posts</h4>
+                        <div className="select-post-type-block">
+                            <span onClick={() => {setType('draft')}} 
+                                className={type === 'draft' ?
+                                    "select-post-type-block__option select-post-type-block__option_selected"
+                                    : "select-post-type-block__option"
+                            }>Drafts
+                            </span>
+                            <span onClick={() => {setType('publish')}}
+                                className={type === 'publish' ?
+                                    "select-post-type-block__option select-post-type-block__option_selected"
+                                    : "select-post-type-block__option"
+                            }>Published
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

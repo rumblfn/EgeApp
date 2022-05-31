@@ -194,7 +194,7 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                         setActions(prevState => [
                             ...prevState,
                             {
-                                type: ArticleActionTypes.OL_LIST,
+                                type: ArticleActionTypes.PRE_TEXT,
                                 content: null,
                                 language: null,
                                 linkTitle: null
@@ -202,22 +202,7 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
                         ])
                     }}
                 >
-                    <i className="fa-solid fa-list-ol"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.UL_LIST,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-list-ul"/>
+                    <i className="fa-solid fa-tree"/>
                 </button>
             </div>
         </div>

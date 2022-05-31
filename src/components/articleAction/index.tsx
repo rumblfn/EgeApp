@@ -2,6 +2,7 @@ import { FC, useState, useRef } from "react";
 import { ArticleAction, ArticleActionTypes } from "../../types/article";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import encodeImageFileAsURL from "../static/encodeImageFileAsURL";
 import './style.css';
 
 var Latex = require('react-latex');
@@ -15,19 +16,6 @@ interface Props {
             => ArticleAction[])) 
     => void;
 }
-
-export const encodeImageFileAsURL = (element: any, setter: any) => {
-    try {
-        let file = element;
-        file = element.files[0];
-        let reader = new FileReader();
-        reader.onloadend = () => {
-            setter(reader.result)
-        }
-        reader.readAsDataURL(file);
-    } catch (err) {
-        alert('file reader error')
-}}
 
 export const checkFileTypeAndSize = (e: any, type: string) => {
     let file = e.target.files[0];
@@ -97,7 +85,7 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
         }
         const check = checkFileTypeAndSize(e, 'image');
         if (check) {
-            encodeImageFileAsURL(e.target, setImageDataFull);
+            encodeImageFileAsURL(e, setImageDataFull);
         }
     }
 
@@ -147,7 +135,7 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
                     {imageData ? 
                     <div className='audio-player-container'>
                         <img ref={imageUploadedRef} 
-                            style={{maxWidth: '100%', marginTop: 16}}
+                            style={{maxWidth: '100%', marginTop: 16, maxHeight: '60vh'}}
                             className='player-container__content' 
                             src={typeof imageData === 'boolean' ? '' : imageData} alt="картинка"
                         />
@@ -371,16 +359,37 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
                     />
                 </div>
             )
-        case ArticleActionTypes.OL_LIST:
+        case ArticleActionTypes.PRE_TEXT:
             return (
-                <div>
-                            
-                </div>
-            )
-        case ArticleActionTypes.UL_LIST:
-            return (
-                <div>
-                                
+                <div className="action-box">
+                    <div className="action-box-simple-text" onClick={() => {setAboutEditorMode(true)}}>
+                        {
+                            action.content ?
+                                <pre>
+                                    {action.content}
+                                </pre>
+                                : <span style={{fontSize: 16, color: 'grey'}}>Click here to change</span>
+                        }
+                    </div>
+                    {
+                        aboutEditorMode ?
+                        <div>
+                            <textarea
+                                className="auth-input" 
+                                style={{resize: 'none', minHeight: 150}}
+                                onBlur={(e) => {
+                                    setAboutEditorMode(true); 
+                                    handleText(e.target.value)
+                                }}
+                                onChange={e => setInputValue(e.target.value)}
+                                defaultValue={inputValue ? inputValue : typeof action.content === 'string' ? action.content : ''}
+                            />
+                        </div>
+                        : null
+                    }
+                    <i className="fa-solid fa-xmark action-box-rm"
+                        onClick={removeAction}
+                    />
                 </div>
             )
         default:

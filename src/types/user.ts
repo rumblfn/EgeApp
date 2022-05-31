@@ -1,8 +1,14 @@
+import { ArticleAction } from './article';
+
 export enum UserActionTypes {
     FETCH_USER = "FETCH_USER",
     FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS",
     FETCH_USER_ERROR = "FETCH_USER_ERROR",
     SET_USER_ABOUT = "SET_USER_ABOUT",
+    SET_USER_IMG  = 'SET_USER_IMG',
+    REMOVE_USER_IMG = "REMOVE_USER_IMG",
+    ADD_USER_ARTICLE_TO_DRAFTS = "ADD_USER_ARTICLE_TO_DRAFTS",
+    ADD_USER_ARTICLE_TO_PUBLISH = "ADD_USER_ARTICLE_TO_PUBLISH"
 }
 
 export interface UserUserState {
@@ -17,6 +23,8 @@ export interface UserUserState {
 
 export interface UserState {
     user: UserUserState;
+    draftedArticles: {};
+    articles: {};
     loading: boolean;
     error: null | string;
 }
@@ -40,4 +48,31 @@ export interface SetUserAboutAction {
     payload: string;
 }
 
-export type UserAction = FetchUserAction | FetchUserSuccessAction | FetchUserErrorAction | SetUserAboutAction;
+export interface SetUserImgAction {
+    type: UserActionTypes.SET_USER_IMG;
+    payload: string;
+}
+
+export interface RemoveUserImgAction {
+    type: UserActionTypes.REMOVE_USER_IMG;
+}
+
+export interface addUserArticleToDraftsAction {
+    type: UserActionTypes.ADD_USER_ARTICLE_TO_DRAFTS;
+    payload: {
+        title: string,
+        actions: ArticleAction[]
+    }
+}
+
+export interface addUserArticleToPublishAction {
+    type: UserActionTypes.ADD_USER_ARTICLE_TO_PUBLISH;
+    payload: {
+        title: string,
+        actions: ArticleAction[]
+    }
+}
+
+export type UserAction = FetchUserAction | FetchUserSuccessAction | 
+    FetchUserErrorAction | SetUserAboutAction | SetUserImgAction | 
+    RemoveUserImgAction | addUserArticleToDraftsAction | addUserArticleToPublishAction;

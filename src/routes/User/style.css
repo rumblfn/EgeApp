@@ -27,9 +27,10 @@
     aspect-ratio: 1 / 1;
     width: 100%;
     border-radius: 6px;
+    object-fit: cover;
 }
 
-.profileDescriptionBox {
+.profileDescriptionBox, .profile-content-box {
     background-color: var(--app-color-theme);
     padding: 12px;
     border-radius: 12px;
@@ -115,4 +116,20 @@
 
 .profileAboutBox {
     
+}
+
+.select-post-type-block {
+    display: flex;
+    justify-content: space-around;
+}
+
+.select-post-type-block__option {
+    margin: 8px;
+    cursor: pointer;
+    transition: all 120ms;
+}
+
+.select-post-type-block__option_selected {
+    color: var(--app-link-color1);
+    font-weight: bolder;
 }

@@ -8,8 +8,7 @@ export enum ArticleActionTypes {
     CODE_TEXT = 'CODE_TEXT',
     BOLD_TEXT = 'BOLD_TEXT',
     FORMULA = 'FORMULA',
-    OL_LIST = 'OL_LIST',
-    UL_LIST = 'UL_LIST'
+    PRE_TEXT = 'PRE_TEXT'
 }
 
 export interface HeadingAction {
@@ -75,15 +74,8 @@ export interface FormulaAction {
     linkTitle: string | null;
 }
 
-export interface OlListAction {
-    type: ArticleActionTypes.OL_LIST;
-    content: string[] | null;
-    language: null;
-    linkTitle: string | null;
-}
-
-export interface UlListAction {
-    type: ArticleActionTypes.UL_LIST | string;
+export interface PreTextAction {
+    type: ArticleActionTypes.PRE_TEXT;
     content: string[] | null;
     language: null;
     linkTitle: string | null;
@@ -99,5 +91,6 @@ export type ArticleAction =
     CodeTextAction |
     BoldTextAction |
     FormulaAction |
-    OlListAction |
-    UlListAction;
+    PreTextAction;
+
+export type ArticleType = 'draft' | null | 'publish';
