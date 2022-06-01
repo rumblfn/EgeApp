@@ -1,3 +1,9 @@
+export interface ArticleState {
+    articles: {};
+    loading: boolean;
+    error: null | string;
+}
+
 export enum ArticleActionTypes {
     HEADING = 'HEADING',
     QUOTE = 'QUOTE',
@@ -10,6 +16,71 @@ export enum ArticleActionTypes {
     FORMULA = 'FORMULA',
     PRE_TEXT = 'PRE_TEXT'
 }
+
+export enum ArticleActionTypesReducer {
+    FETCH_DRAFT_USER_ARTICLES = "FETCH_DRAFT_USER_ARTICLES",
+    FETCH_DRAFT_USER_ARTICLES_SUCCESS = "FETCH_DRAFT_USER_ARTICLES_SUCCESS",
+    FETCH_DRAFT_USER_ARTICLES_ERROR = "FETCH_DRAFT_USER_ARTICLES_ERROR",
+    FETCH_USER_ARTICLES = "FETCH_USER_ARTICLES",
+    FETCH_USER_ARTICLES_SUCCESS = "FETCH_USER_ARTICLES_SUCCESS",
+    FETCH_USER_ARTICLES_ERROR = "FETCH_USER_ARTICLES_ERROR",
+}
+
+export enum ArticleActionTypesArticleReducer {
+    FETCH_ARTICLE = "FETCH_ARTICLE",
+    FETCH_ARTICLE_SUCCESS = "FETCH_ARTICLE_SUCCESS",
+    FETCH_ARTICLE_ERROR = "FETCH_ARTICLE_ERROR",
+}
+
+export interface FetchArticleAction {
+    type: ArticleActionTypesArticleReducer.FETCH_ARTICLE
+}
+
+export interface FetchArticleSuccessAction {
+    type: ArticleActionTypesArticleReducer.FETCH_ARTICLE_SUCCESS;
+    payload: OneArticle;
+}
+
+export interface FetchArticleErrorAction {
+    type: ArticleActionTypesArticleReducer.FETCH_ARTICLE_ERROR;
+    payload: string;
+}
+
+export interface FetchUserArticlesAction {
+    type: ArticleActionTypesReducer.FETCH_USER_ARTICLES
+}
+
+export interface FetchUserArticlesSuccessAction {
+    type: ArticleActionTypesReducer.FETCH_USER_ARTICLES_SUCCESS;
+    payload: OneArticle[];
+}
+
+export interface FetchUserArticlesErrorAction {
+    type: ArticleActionTypesReducer.FETCH_USER_ARTICLES_ERROR;
+    payload: string;
+}
+
+export interface FetchUserDraftArticlesAction {
+    type: ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES
+}
+
+export interface FetchUserDraftArticlesSuccessAction {
+    type: ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES_SUCCESS;
+    payload: OneArticle[];
+}
+
+export interface FetchUserDraftArticlesErrorAction {
+    type: ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES_ERROR;
+    payload: string;
+}
+
+export type FetchingArticleAction = 
+    FetchUserArticlesAction | 
+    FetchUserArticlesSuccessAction |
+    FetchUserArticlesErrorAction |
+    FetchUserDraftArticlesAction |
+    FetchUserDraftArticlesSuccessAction |
+    FetchUserDraftArticlesErrorAction;
 
 export interface HeadingAction {
     type: ArticleActionTypes.HEADING;
@@ -94,3 +165,17 @@ export type ArticleAction =
     PreTextAction;
 
 export type ArticleType = 'draft' | null | 'publish';
+
+export type ArticleActionReducer = FetchArticleAction | FetchArticleSuccessAction | FetchArticleErrorAction;
+
+export interface OneArticle {
+    id?: number;
+    userId?: number;
+    title: string;
+    type: ArticleType;
+    views: number;
+    starred: number;
+    actions?: ArticleAction[];
+    subject_id: number;
+    task_id: number;
+}

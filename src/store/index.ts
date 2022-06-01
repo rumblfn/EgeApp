@@ -5,11 +5,13 @@ import { combineReducers } from "redux";
 import { subjectsReducer } from "./reducers/subjectsReducer";
 import { subjectsTasksInfoReducer } from "./reducers/subjectsTasksInfoReducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { articleReducer } from './reducers/articleReducer';
 
 const rootReducer = combineReducers({
     subjects: subjectsReducer,
     subjectsTasksInfo: subjectsTasksInfoReducer,
-    user: userReducer
+    user: userReducer,
+    article: articleReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

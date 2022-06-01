@@ -7,18 +7,19 @@ import { ArticleActionTypes, ArticleAction } from "../../types/article";
 import './style.css';
 
 interface Props {
+    subjectId: number;
+    setSubjectId: (value: number) => void;
+    setTaskNumber: (value: number) => void;
     setActions: (newState: ArticleAction[] | 
                     ((prevState: ArticleAction[]) 
                         => ArticleAction[])) 
                 => void;
 }
 
-export const NewArticleInstruments:FC<Props> = ({setActions}) => {
+export const NewArticleInstruments:FC<Props> = ({setActions, subjectId, setSubjectId, setTaskNumber}) => {
     const {subjects} = useTypedSelector(state => state.subjects)
     const [listTasks, setListTasks] = useState<SubjectTasksInfo[]>([])
     const {fetchSubjects, fetchSubjectTasksInfo} = useActions()
-    const [subjectId, setSubjectId] = useState<number>(1);
-    const [taskNumber, setTaskNumber] = useState<number>(1);
     const {subjectsTasksInfo, loaded} = useTypedSelector<any>(state => state.subjectsTasksInfo)
 
     useEffect(() => {
@@ -38,14 +39,14 @@ export const NewArticleInstruments:FC<Props> = ({setActions}) => {
     return (
         <div className="newArticleInstruments">
             <div className="newArticleInstruments-top">
-                <select onChange={e => setTaskNumber(parseInt(e.target.value))} className="selectSubject" name="selectSubject">
+                <select onChange={e => setSubjectId(parseInt(e.target.value))} className="selectSubject" name="selectSubject">
                     {subjects.map((subject: Subject) => 
                         <option value={subject.id} key={subject.id}>
                             {subject.title}
                         </option>)
                     }
                 </select>
-                <select onChange={e => setSubjectId(parseInt(e.target.value))} className="selectSubjectTask" name="selectSubjectTask">
+                <select onChange={e => setTaskNumber(parseInt(e.target.value))} className="selectSubjectTask" name="selectSubjectTask">
                     {listTasks.map((item: SubjectTasksInfo) => 
                         <option value={item.task_number} key={item.task_number}>
                             {item.task_number}. {item.title}

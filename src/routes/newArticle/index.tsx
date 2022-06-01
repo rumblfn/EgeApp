@@ -11,12 +11,15 @@ import { useNavigate } from "react-router-dom";
 export const NewArticlePage:FC = () => {
     const navigate = useNavigate();
     const userLogin = useTypedSelector<string | null>(state => state.user.user.login);
-    const {addUserArticleToDrafts, addUserArticleToPublish} = useActions();
+    const {addUserArticle} = useActions();
 
     const [modalActive, setModalActive] = useState<boolean>(false);
     const [type, setType] = useState<ArticleType>(null);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [articleTitle, setArticleTitle] = useState<string>('');
+
+    const [subjectId, setSubjectId] = useState<number>(1);
+    const [taskNumber, setTaskNumber] = useState<number>(1);
 
     const [actions, setActions] = useState<ArticleAction[]>([
         {
@@ -29,17 +32,11 @@ export const NewArticlePage:FC = () => {
 
     useEffect(() => {
         if (submitted && userLogin) {
-            switch (type) {
-                case 'draft':
-                    addUserArticleToDrafts(userLogin, articleTitle, actions);
-                    navigate('/profile');
-                    return
-                case 'publish':
-                    addUserArticleToPublish(userLogin, articleTitle, actions);
-                    navigate('/profile');
-                    return
-                default:
-                    alert('Some errors, try again')
+            if (type) {
+                addUserArticle(userLogin, articleTitle, actions, subjectId, taskNumber, type);
+                navigate('/profile');
+            } else {
+                alert('Selected type is null')
             }
         }
     }, [submitted, type])
@@ -56,7 +53,12 @@ export const NewArticlePage:FC = () => {
 
     return (
         <div style={{minHeight: '100vh'}}>
-            <NewArticleInstruments setActions={setActions} />
+            <NewArticleInstruments 
+                setActions={setActions} 
+                setSubjectId={setSubjectId}
+                setTaskNumber={setTaskNumber}
+                subjectId={subjectId}
+            />
             <ArticleWhiteList 
                 publishArticle={publishArticle}
                 saveArticleToDrafts={saveArticleToDrafts} 

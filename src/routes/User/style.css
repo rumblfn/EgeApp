@@ -1,5 +1,5 @@
-.profileTopBox {
-    margin-top: 64px;
+.profileMainBox {
+    margin: 64px 0;
     display: grid;
     border-radius: 12px;
     grid-template-columns: 1fr 5fr;
@@ -132,4 +132,14 @@
 .select-post-type-block__option_selected {
     color: var(--app-link-color1);
     font-weight: bolder;
+}
+
+.article-profile-preview {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.article-profile-preview * {
+    margin: 6px;
 }

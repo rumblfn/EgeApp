@@ -1,3 +1,4 @@
+import { ArticleActionTypesReducer, FetchingArticleAction } from "../../types/article"
 import { UserState, UserAction, UserActionTypes } from "../../types/user"
 
 const initialState: UserState = {
@@ -10,13 +11,19 @@ const initialState: UserState = {
         profileBannerImg: null,
         status: ''
     },
-    draftedArticles: {},
-    articles: {},
+    draftedArticles: [],
+    articles: [],
+    draftedArticlesLoading: false,
+    articlesLoading: false,
+    draftedArticlesError: '',
+    articlesError: '',
     loading: false,
-    error: null
+    error: null,
+    draftArticlesLoaded: false,
+    articlesLoaded: false
 }
 
-export const userReducer = (state = initialState, action: UserAction): UserState => {
+export const userReducer = (state = initialState, action: UserAction | FetchingArticleAction): UserState => {
     switch (action.type) {
         case UserActionTypes.FETCH_USER:
             return {
@@ -66,18 +73,57 @@ export const userReducer = (state = initialState, action: UserAction): UserState
         case UserActionTypes.ADD_USER_ARTICLE_TO_DRAFTS:
             return {
                 ...state,
-                draftedArticles: {
-                    ...state.draftedArticles,
-                    [action.payload.title]: action.payload.actions
-                }
+                draftedArticles: [...state.draftedArticles, {...action.payload}]
             }
         case UserActionTypes.ADD_USER_ARTICLE_TO_PUBLISH:
+
             return {
                 ...state,
-                articles: {
-                    ...state.articles,
-                    [action.payload.title]: action.payload.actions
-                }
+                articles: [...state.draftedArticles, {...action.payload}]
+            }
+        case ArticleActionTypesReducer.FETCH_USER_ARTICLES:
+            return {
+                ...state,
+                articlesLoading: true,
+                articlesLoaded: true,
+                articlesError: ''
+            }
+        case ArticleActionTypesReducer.FETCH_USER_ARTICLES_SUCCESS:
+            return {
+                ...state,
+                articlesLoading: false,
+                articlesError: '',
+                articles: [
+                    ...action.payload
+                ]
+            }
+        case ArticleActionTypesReducer.FETCH_USER_ARTICLES_ERROR:
+            return {
+                ...state,
+                articlesLoading: false,
+                articlesError: action.payload
+            }
+        case ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES:
+            return {
+                ...state,
+                articlesLoading: true,
+                articlesError: '',
+                draftArticlesLoaded: true,
+            }
+        case ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES_SUCCESS:
+            return {
+                ...state,
+                articlesLoading: false,
+                articlesError: '',
+                draftedArticles: [
+                    ...action.payload
+                ]
+            }
+        case ArticleActionTypesReducer.FETCH_DRAFT_USER_ARTICLES_ERROR:
+            return {
+                ...state,
+                articlesLoading: false,
+                articlesError: action.payload
             }
         default:
             return state;

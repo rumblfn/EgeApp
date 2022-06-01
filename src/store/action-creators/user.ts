@@ -1,8 +1,8 @@
-import { ArticleAction } from './../../types/article';
+import { ArticleAction, ArticleType } from './../../types/article';
 import { Dispatch } from 'redux';
 import { UserAction, SetUserAboutAction, 
     SetUserImgAction, RemoveUserImgAction,
-    addUserArticleToDraftsAction, addUserArticleToPublishAction 
+    addUserArticleAction 
 } from '../../types/user';
 import { UserActionTypes } from '../../types/user';
 
@@ -88,32 +88,34 @@ export const removeUserImgStore = (login: string) => {
     }
 }
 
-export const addUserArticleToDrafts = (login: string, title: string, actions: ArticleAction[]) => {
-    return async (dispatch: Dispatch<addUserArticleToDraftsAction>) => {
+export const addUserArticle = (
+    login: string, title: string, 
+    actions: ArticleAction[], 
+    subject_id: number, task_id: number, 
+    type: ArticleType
+) => {
+    return async (dispatch: Dispatch<addUserArticleAction>) => {
         try {
-            dispatch({
-                type: UserActionTypes.ADD_USER_ARTICLE_TO_DRAFTS, 
-                payload: {
-                    title,
-                    actions
-                }
+            const response = await axios.post(`http://localhost:8888/articles/addArticle`, {
+                login, title, subject_id, task_id, type,
+                actions: JSON.stringify(actions)
             })
-        } catch (e) {
-            throw console.error('errors on changing status, try later');
-        }
-    }
-}
 
-export const addUserArticleToPublish = (login: string, title: string, actions: ArticleAction[]) => {
-    return async (dispatch: Dispatch<addUserArticleToPublishAction>) => {
-        try {
-            dispatch({
-                type: UserActionTypes.ADD_USER_ARTICLE_TO_PUBLISH, 
-                payload: {
-                    title,
-                    actions
+            if (response.data.status) {
+                let current_type = UserActionTypes.ADD_USER_ARTICLE_TO_PUBLISH;
+
+                if (type === 'draft') {
+                    current_type = UserActionTypes.ADD_USER_ARTICLE_TO_DRAFTS
                 }
-            })
+
+                dispatch({
+                    type: current_type, 
+                    payload: {
+                        id: response.data.article_id, views: 0, starred: 0,
+                        title, actions, subject_id, task_id, type, userId: response.data.user_id
+                    }
+                })
+            }
         } catch (e) {
             throw console.error('errors on changing status, try later');
         }
