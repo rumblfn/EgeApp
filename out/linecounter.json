@@ -1,0 +1,464 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "/Users/samilvaliahmetov/education/programming/local-github/ege-app",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-06-02 02:10:48",
+            "filesum": 68,
+            "codesum": 32381,
+            "commentsum": 25,
+            "blanksum": 369,
+            "statistics": {
+                ".ts": {
+                    "code": 781,
+                    "comment": 9,
+                    "blank": 83
+                },
+                ".tsx": {
+                    "code": 1581,
+                    "comment": 3,
+                    "blank": 114
+                },
+                ".css": {
+                    "code": 822,
+                    "comment": 6,
+                    "blank": 140
+                },
+                ".md": {
+                    "code": 28,
+                    "comment": 6,
+                    "blank": 20
+                },
+                ".json": {
+                    "code": 29134,
+                    "comment": 0,
+                    "blank": 7
+                },
+                "": {
+                    "code": 18,
+                    "comment": 1,
+                    "blank": 5
+                },
+                ".html": {
+                    "code": 17,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 29052,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "public/index.html"
+                },
+                {
+                    "blank": 20,
+                    "code": 26,
+                    "comment": 6,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 19,
+                    "code": 87,
+                    "comment": 0,
+                    "filename": "src/App.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/App.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/components/addArticleBox/index.tsx"
+                },
+                {
+                    "blank": 16,
+                    "code": 386,
+                    "comment": 0,
+                    "filename": "src/components/articleAction/index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "src/components/articleAction/style.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/components/articleWhiteList/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/components/articleWhiteList/style.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/components/button/index.tsx"
+                },
+                {
+                    "blank": 44,
+                    "code": 222,
+                    "comment": 0,
+                    "filename": "src/components/button/style.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src/components/footer/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src/components/header/details.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/components/header/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/components/header/style.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "src/components/listOfSubjects/index.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "src/components/listOfSubjectTasksInfo/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/components/modalWithInput/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/components/modalWithInput/style.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 206,
+                    "comment": 0,
+                    "filename": "src/components/newArticleInstruments/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/components/newArticleInstruments/style.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/components/static/encodeImageFileAsURL.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/components/static/mathRandom.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/hocs/PrivateRoute.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src/hooks/useActions.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/hooks/useTypedSelector.ts"
+                },
+                {
+                    "filename": "src/images/plug.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/images/trash.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src/index.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/routes/Article/index.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 113,
+                    "comment": 2,
+                    "filename": "src/routes/Auth/index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/style.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 88,
+                    "comment": 0,
+                    "filename": "src/routes/Home/bulb.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "src/routes/Home/index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 24,
+                    "comment": 6,
+                    "filename": "src/routes/Home/style.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "src/routes/newArticle/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src/routes/Subject/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src/routes/SubjectTask/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "src/routes/User/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src/routes/User/postPreview.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "src/routes/User/profileDescAbout.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/routes/User/profileDescriptionBox.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 60,
+                    "comment": 1,
+                    "filename": "src/routes/User/profileImageBox.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "src/routes/User/profilePostsBox.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "src/routes/User/setEmailBox.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/routes/User/setShowingPostsType.tsx"
+                },
+                {
+                    "blank": 22,
+                    "code": 123,
+                    "comment": 0,
+                    "filename": "src/routes/User/style.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 71,
+                    "comment": 3,
+                    "filename": "src/store/action-creators/articles.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/subjects.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 22,
+                    "comment": 1,
+                    "filename": "src/store/action-creators/subjectTasks.ts"
+                },
+                {
+                    "blank": 10,
+                    "code": 113,
+                    "comment": 5,
+                    "filename": "src/store/action-creators/user.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/store/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "src/store/reducers/articleReducer.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/store/reducers/subjectsReducer.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/store/reducers/subjectsTasksInfoReducer.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 128,
+                    "comment": 0,
+                    "filename": "src/store/reducers/userReducer.ts"
+                },
+                {
+                    "blank": 27,
+                    "code": 154,
+                    "comment": 0,
+                    "filename": "src/types/article.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/types/images.d.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/types/subjects.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src/types/subjectsTasksInfo.ts"
+                },
+                {
+                    "blank": 11,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "src/types/user.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "tsconfig.json"
+                }
+            ]
+        }
+    ]
+}

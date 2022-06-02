@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import profileDefault from "../../images/plug.png"
 import trash from "../../images/trash.png"
 import encodeImageFileAsURL from "../../components/static/encodeImageFileAsURL";
-import { checkFileTypeAndSize } from "../../components/articleAction";
+import { checkFileTypeAndSize } from "../../components/static/checkFileTypeAndSize";
 import { useActions } from "../../hooks/useActions";
 
 interface ProfileImageBoxProps {

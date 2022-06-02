@@ -94,7 +94,7 @@
     outline: 0;
    }
    
-   .profile-image-upload-button span {
+   .profile-image-upload-button span, label {
     background-color: var(--app-upload-button);
     padding: 8px;
     border-radius: 6px;
