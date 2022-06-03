@@ -43,6 +43,8 @@ export const PostsBox:FC<PostsBoxProps> = ({type, login}) => {
 
     return (
         <div className="profile-content-box" style={{minHeight: 150}}>
+            {articlesLoading || draftedArticlesLoading ? <p>Loading...</p> : null}
+            {articlesError || draftedArticlesError ? <p>Some errors</p> : null}
             {articlesToRender.map((article: OneArticle) => 
                 <ArticlePreview 
                     key={nanoid(8)}
