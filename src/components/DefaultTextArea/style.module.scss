@@ -1,0 +1,43 @@
+.heading,
+.bold,
+.code,
+.italic,
+.plain {
+    background-color: transparent;
+    padding: 8px 12px;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+    border-bottom: 2px solid var(--content-color);
+    outline: none;
+    word-break: break-all;
+    word-wrap: break-word;
+    display: inline-block;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.heading {
+    margin-bottom: 22px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.code {
+    resize: none;
+    height: 140px;
+    border: 2px solid var(--content-color);
+    word-break: normal;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.plain {
+}

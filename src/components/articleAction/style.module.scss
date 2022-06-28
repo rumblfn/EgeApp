@@ -1,0 +1,59 @@
+.action-box {
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 12px;
+
+    &:hover &-rm {
+        opacity: 1;
+    }
+}
+
+.action-box-rm {
+    opacity: 0;
+    position: absolute;
+    top: 2px;
+    left: -30px;
+    cursor: pointer;
+    transition: all 120ms;
+    padding: 0 6px;
+    border-radius: 4px;
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+.data-list-input-box {
+    margin: 12px 0;
+    width: 100%;
+    position: relative;
+}
+
+.img-action {
+    max-width: 100%;
+    max-height: 30vh;
+    border-radius: 8px;
+}
+
+.inputs-box {
+    display: flex;
+    gap: 16px;
+}
+
+.input-quote {
+    width: 100%;
+    border: none;
+    padding: 8px 16px;
+    outline: none;
+    background-color: var(--app-color-6);
+    padding: 18px;
+    font-size: 20px;
+    border-left: 6px solid var(--content-color);
+    width: 100%;
+}
+
+.tags-box {
+    position: relative;
+    color: var(--content-color-2);
+    font-weight: 500
+}

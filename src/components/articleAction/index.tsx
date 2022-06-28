@@ -1,28 +1,22 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+import ArticleActionsContext from "../../routes/newArticle/context";
 import { ArticleAction, ArticleActionTypes } from "../../types/article";
-import { HeadingArticle } from "./heading";
-import { QuoteArticle } from "./quote";
-import { ImageArticle } from "./image";
-import { LinkArticle } from "./link";
-import { TextArticle } from "./text";
-import { ItalicTextArticle } from "./italicText";
-import { CodeArticle } from "./code";
-import { BoldTextArticle } from "./bold";
-import { FormulaArticle } from "./formula";
-import { PreTextArticle } from "./preText";
-import './style.css';
+import ActionSwitcher from "./actionSwitcher";
+import NoteActionsContextHandlers from "./context";
 
 interface Props {
     index: number;
     action: ArticleAction;
     actions: ArticleAction[];
-    setActions: (newState: ArticleAction[] | 
-        ((prevState: ArticleAction[]) 
-            => ArticleAction[])) 
-    => void;
 }
 
-export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, index}) => {
+export const ArticleActionComponent:FC<Props> = ({action, index, actions}) => {
+
+    const contextStore = useContext(ArticleActionsContext)
+    if (!contextStore?.setActions) {
+        return null
+    }
+    const {setActions} = contextStore
 
     const removeAction = () => {
         setActions([
@@ -35,6 +29,20 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
         const currentAction = actions[index]
         currentAction.content = text;
 
+        if (currentAction.type !== ArticleActionTypes.IMAGE 
+            && currentAction.type !== ArticleActionTypes.CODE_TEXT
+        ) {
+            const tags: string[] = []
+            currentAction.content.split(' ').forEach((sub: string) => {
+                const idx = sub.indexOf('#')
+                if (idx !== -1 && sub.length - 1 > idx) {
+                    tags.push(sub.slice(idx))
+                }
+            })
+
+            currentAction.tags = [...tags]
+        }
+
         setActions([
             ...actions.slice(0, index),
             currentAction,
@@ -44,7 +52,9 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
 
     const handleLang = (text: string) => {
         const currentAction = actions[index]
-        currentAction.language = text;
+        if (currentAction.type === ArticleActionTypes.CODE_TEXT) {
+            currentAction.language = text;
+        }
 
         setActions([
             ...actions.slice(0, index),
@@ -53,101 +63,11 @@ export const ArticleActionComponent:FC<Props> = ({action, actions, setActions, i
         ])
     }
 
-    const handleLinkTitle = (linkTitle: string) => {
-        const currentAction = actions[index]
-        currentAction.linkTitle = linkTitle;
-
-        setActions([
-            ...actions.slice(0, index),
-            currentAction,
-            ...actions.slice(index + 1, actions.length),
-        ])
-    }
-
-    switch (action.type) {
-        case ArticleActionTypes.HEADING:
-            return (
-                <HeadingArticle 
-                    content={action.content}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.QUOTE:
-            return (
-                <QuoteArticle 
-                    content={action.content}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.IMAGE:
-            return (
-                <ImageArticle 
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.LINK:
-            return (
-                <LinkArticle
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                    handleLinkTitle={handleLinkTitle}
-                    linkTitleAction={action.linkTitle}
-                />
-            )
-        case ArticleActionTypes.TEXT:
-            return (
-                <TextArticle
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.ITALIC_TEXT:
-            return (
-                <ItalicTextArticle
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.CODE_TEXT:
-            return (
-                <CodeArticle 
-                    handleLang={handleLang}
-                    language={action.language}
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.BOLD_TEXT:
-            return (
-                <BoldTextArticle
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.FORMULA:
-            return (
-                <FormulaArticle
-                    content={action.content ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-        case ArticleActionTypes.PRE_TEXT:
-            return (
-                <PreTextArticle
-                    content={typeof action.content === 'string' ? action.content : ''}
-                    handleText={handleText}
-                    removeAction={removeAction}
-                />
-            )
-    }
+    return (
+        <NoteActionsContextHandlers.Provider value={{
+            removeAction, handleText, handleLang
+        }}>
+            <ActionSwitcher action={action} />
+        </NoteActionsContextHandlers.Provider>
+    )
 }

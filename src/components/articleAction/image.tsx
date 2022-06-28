@@ -1,17 +1,17 @@
-import { FC, useState, useRef } from "react";
+import { FC, useState, useRef, useContext } from "react";
 import { checkFileTypeAndSize } from "../static/checkFileTypeAndSize";
 import encodeImageFileAsURL from "../static/encodeImageFileAsURL";
+import { UploadFile } from "../UploadFile";
+import { Xmark } from "../Xmark";
+import NoteActionsContextHandlers from "./context";
+import styles from './style.module.scss'
 
-interface QuoteArticleProps {
-    removeAction: () => void;
+interface Props {
     content: string;
-    handleText: (value: string) => void;
 }
 
-export const ImageArticle:FC<QuoteArticleProps> = ({
-    removeAction, content, handleText
-}) => {
-    const [imageData, setImageData] = useState<string | boolean>(content);
+export const ImageArticle:FC<Props> = ({content}) => {
+    const [imageData, setImageData] = useState<string>(content);
     const imageUploadedRef = useRef(null);
 
     const handleUploadedFileImage = (e: any) => {
@@ -23,6 +23,13 @@ export const ImageArticle:FC<QuoteArticleProps> = ({
             encodeImageFileAsURL(e, setImageDataFull);
         }
     }
+    
+    const contextStore = useContext(NoteActionsContextHandlers)
+
+    if (!contextStore?.handleText && !contextStore?.removeAction && !contextStore?.handleLang)
+        return null
+
+    const {handleText, removeAction} = contextStore
 
     const setImageDataFull = (data: string) => {
         setImageData(data)
@@ -30,33 +37,15 @@ export const ImageArticle:FC<QuoteArticleProps> = ({
     }
 
     return (
-        <div className="action-box" style={{marginTop: 16}}>
-            {
-                !imageData ? 
-                <>
-                    <label htmlFor="file-upload" style={{display: 'flex', alignItems: 'center', gap: 16}}>
-                        <span className="text">Select image</span>
-                        <button className="profile-image-upload-button" style={{width: 'fit-content', borderRadius: 4}}>
-                            <label htmlFor="file-upload" style={{borderRadius: 2}} className="text">Upload</label>
-                        </button>
-                    </label>
-                    <input id="file-upload" type="file" className="file-uploader"
-                        onChange={e => {handleUploadedFileImage(e)}}/>
-                </> : null
-            }
-            {imageData ? 
-                <div className='image-player-container'>
-                    <img ref={imageUploadedRef} 
-                        style={{maxWidth: '100%', maxHeight: '60vh', borderRadius: 8}}
-                        className='player-container__content ' 
-                        src={typeof imageData === 'boolean' ? '' : imageData} alt="картинка"
-                    />
-                </div>
-            : null}
-            <i className="fa-solid fa-xmark action-box-rm"
-                style={{backgroundColor: 'white', mixBlendMode: 'hard-light'}}
-                onClick={removeAction}
-            />
+        <div className={styles["action-box"]} style={{marginTop: 16}}>
+            {!imageData && <UploadFile handler={handleUploadedFileImage}/>}
+            {imageData &&
+                <img className={styles['img-action']} 
+                    ref={imageUploadedRef} 
+                    src={imageData} 
+                    alt="картинка"
+            />}
+            <Xmark removeAction={removeAction} />
         </div>
     )
 }

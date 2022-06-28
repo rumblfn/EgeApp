@@ -1,0 +1,43 @@
+.button {
+    border: 2px solid var(--content-color);
+    background-color: var(--button-bg-color);
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: transparent 0 0 0 3px, var(--content-color) 0 1px 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    padding: 0.7rem 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s;
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+    touch-action: manipulation;
+
+    &:hover {
+        box-shadow: var(--content-color) 0 0 0 3px, transparent 0 0 0 0;
+    }
+}
+
+.default {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.7rem 0.9rem;
+}
+
+.small {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.5rem 0.6rem;
+    flex-grow: 0;
+}

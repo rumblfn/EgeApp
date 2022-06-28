@@ -11,9 +11,23 @@ import { useTypedSelector } from './hooks/useTypedSelector';
 import { SubjectTaskPage } from './routes/SubjectTask';
 import { NewArticlePage } from './routes/newArticle';
 import { ArticlePage } from './routes/Article';
+import { useState } from 'react';
+import { ArticleAction, ArticleActionTypes } from './types/article';
+import { useDebounce } from 'use-debounce';
 
 function App() {
   const isUserAuthed = useTypedSelector<any>(state => state.user.user.statusUser);
+
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagsDebounced] = useDebounce(tags, 500)
+
+  const [actions, setActions] = useState<ArticleAction[]>([
+    {
+        type: ArticleActionTypes.HEADING,
+        content: '',
+        tags: []
+    }
+  ]);
 
   return (
     <div className="App" style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
@@ -25,7 +39,7 @@ function App() {
             isAuthenticated={isUserAuthed}
             authenticationPath="/auth"
           >
-            <NewArticlePage/>
+            <NewArticlePage actions={actions} setActions={setActions}/>
           </ProtectedRoute>
         } />
         <Route path="/profile" element={

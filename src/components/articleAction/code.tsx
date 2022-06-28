@@ -1,70 +1,65 @@
-import { FC, useState, useRef } from "react";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { FC, useContext, useState } from "react";
+import { useComboboxControls } from "react-datalist-input";
+import { DataList } from "../DataListInput";
+import { DefaultCodeTextArea } from "../DefaultTextArea/code";
+import { Button } from "../articleWhiteList/Button";
+import { SyntaxCode } from "../SyntaxCode";
+import { Xmark } from "../Xmark";
+import { ClearInput } from "../Xmark/clearInput";
+import styles from "./style.module.scss";
+import ArticleActionsContextHandlers from "./context";
 
-interface CodeArticleProps {
-    removeAction: () => void;
-    content: string | null;
-    handleText: (value: string) => void;
-    handleLang: (value: string) => void;
-    language: string | null;
+interface Props {
+  content: string;
+  language: string;
 }
 
-export const CodeArticle: FC<CodeArticleProps> = ({
-    content, handleLang, language, handleText, removeAction
-}) => {
-    const [inputValue, setInputValue] = useState<string>('');
-    const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(false)
-    const [lang, setLang] = useState<string | null>(language);
-    const langInputRef = useRef<any>(null);
+export const CodeArticle: FC<Props> = ({content,language}) => {
+  const [aboutEditorMode, setAboutEditorMode] = useState<boolean>(true);
+
+  const { setValue, value } = useComboboxControls({
+    initialValue: language,
+    isExpanded: true,
+  });
+
+  const contextStore = useContext(ArticleActionsContextHandlers)
+
+  if (!contextStore?.handleText && !contextStore?.removeAction && !contextStore?.handleLang)
+      return null
+
+  const {handleText, removeAction, handleLang} = contextStore
 
   return (
-    <div className="action-box">
-      <div
-        className="action-box-simple-text"
-        onClick={() => {
-          setAboutEditorMode(true);
-        }}
-      >
-        {content ? (
-          <SyntaxHighlighter language={lang ? lang : ""} style={docco}>
-            {content}
-          </SyntaxHighlighter>
-        ) : (
-          <span style={{ fontSize: 16, color: "grey" }}>
-            Click here to change
-          </span>
-        )}
-      </div>
-      {aboutEditorMode ? (
-        <div>
-          <input ref={langInputRef}
-            className="input-default"
-            type="text"
-            placeholder="Type your lang here"
-            onChange={(e) => setLang(e.target.value)}
-            value={lang ? lang : language ? language : ""}
+    <div className={styles["action-box"]}>
+      {aboutEditorMode ? 
+        <DefaultCodeTextArea 
+          handleText={handleText}
+          content={content}
+          variant='code'
+        />
+      : <SyntaxCode 
+          content={content} 
+          setValue={setAboutEditorMode} 
+          value={value} 
+      />}
+      {aboutEditorMode && (
+        <div className={styles["data-list-input-box"]}>
+          <DataList 
+            setValue={handleLang} 
+            value={value} 
           />
-          <textarea
-            className="auth-input"
-            style={{ resize: "none", minHeight: 150 }}
-            onBlur={(e) => {
-              setAboutEditorMode(true);
-              handleLang(langInputRef.current.value);
-              handleText(e.target.value);
-            }}
-            onChange={(e) => setInputValue(e.target.value)}
-            defaultValue={
-              inputValue
-                ? inputValue
-                : typeof content === "string"
-                ? content
-                : ""
-            }
-          />
+          <ClearInput setValue={setValue}/>
         </div>
-      ) : null}
-      <i className="fa-solid fa-xmark action-box-rm" onClick={removeAction} />
+      )}
+      {aboutEditorMode && 
+        <Button 
+          valueToSet={false}
+          handler={setAboutEditorMode}
+          text='submit'
+          variant="small"
+        />
+      }
+      <Xmark removeAction={removeAction} />
     </div>
   );
 };

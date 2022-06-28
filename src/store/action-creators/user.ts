@@ -92,13 +92,13 @@ export const addUserArticle = (
     login: string, title: string, 
     actions: ArticleAction[], 
     subject_id: number, task_id: number, 
-    type: ArticleType
+    type: ArticleType, tags: string[]
 ) => {
     return async (dispatch: Dispatch<addUserArticleAction>) => {
         try {
             const response = await axios.post(`http://localhost:8888/articles/addArticle`, {
                 login, title, subject_id, task_id, type,
-                actions: JSON.stringify(actions)
+                actions: JSON.stringify(actions), tags
             })
 
             if (response.data.status) {
@@ -112,7 +112,8 @@ export const addUserArticle = (
                     type: current_type, 
                     payload: {
                         id: response.data.article_id, views: 0, starred: 0,
-                        title, actions, subject_id, task_id, type, userId: response.data.user_id
+                        title, actions, subject_id, task_id, type, userId: response.data.user_id, 
+                        tags
                     }
                 })
             }

@@ -1,22 +1,22 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ArticleActionsContext from "../../routes/newArticle/context";
+import { ArticleActionTypes, ArticleAction } from "../../types/article";
 import { Subject } from "../../types/subjects";
 import { SubjectTasksInfo } from "../../types/subjectsTasksInfo";
-import { ArticleActionTypes, ArticleAction } from "../../types/article";
-import './style.css';
+import { Instrument } from "./instrument";
+import styles from './style.module.scss'
 
 interface Props {
     subjectId: number;
     setSubjectId: (value: number) => void;
     setTaskNumber: (value: number) => void;
-    setActions: (newState: ArticleAction[] | 
-                    ((prevState: ArticleAction[]) 
-                        => ArticleAction[])) 
-                => void;
 }
 
-export const NewArticleInstruments:FC<Props> = ({setActions, subjectId, setSubjectId, setTaskNumber}) => {
+export const NewArticleInstruments:FC<Props> = ({
+    subjectId, setSubjectId, setTaskNumber
+}) => {
     const {subjects} = useTypedSelector(state => state.subjects)
     const [listTasks, setListTasks] = useState<SubjectTasksInfo[]>([])
     const {fetchSubjects, fetchSubjectTasksInfo} = useActions()
@@ -35,10 +35,26 @@ export const NewArticleInstruments:FC<Props> = ({setActions, subjectId, setSubje
             setListTasks(subjectsTasksInfo[subjectId])
         }
     }, [subjectId, loaded])
+    
+    const contextStore = useContext(ArticleActionsContext)
+    if (!contextStore?.setActions) {
+        return null
+    }
+    const {setActions} = contextStore
+    
+    const handleNewAction = (action: ArticleAction) => {
+        setActions(prev => [
+            ...prev, action
+        ])
+    }
+    
+    const returnAction = (type: any): ArticleAction => ({
+        type, content: '', tags: []
+    })
 
     return (
-        <div className="newArticleInstruments">
-            <div className="newArticleInstruments-top">
+        <div className={styles['instrument-list-box']}>
+            <div className={styles['instrument-top']}>
                 <select onChange={e => setSubjectId(parseInt(e.target.value))} className="selectSubject" name="selectSubject">
                     {subjects.map((subject: Subject) => 
                         <option value={subject.id} key={subject.id}>
@@ -54,157 +70,47 @@ export const NewArticleInstruments:FC<Props> = ({setActions, subjectId, setSubje
                     }
                 </select>
             </div>
-            <div className="mainInstruments">
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.HEADING,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
+            <div className={styles['instrument-list']}>
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-heading' 
+                    action={returnAction(ArticleActionTypes.HEADING)}
+                />
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-quote-left' 
+                    action={returnAction(ArticleActionTypes.QUOTE)}
+                />
+                <Instrument
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-image' 
+                    action={{
+                        type: ArticleActionTypes.IMAGE, 
+                        content: '',
                     }}
-                >
-                    <i className="fa-solid fa-heading"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.QUOTE,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
+                />
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-font' action={returnAction(ArticleActionTypes.TEXT)}
+                />
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-italic' 
+                    action={returnAction(ArticleActionTypes.ITALIC_TEXT)}
+                />
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-code' 
+                    action={{
+                        type: ArticleActionTypes.CODE_TEXT, 
+                        content: '', language: ''
                     }}
-                >
-                    <i className="fa-solid fa-quote-left"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.IMAGE,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-image"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.LINK,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-link"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.TEXT,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-font"></i>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.ITALIC_TEXT,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-italic"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.CODE_TEXT,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-code"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.BOLD_TEXT,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-bold"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.FORMULA,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-superscript"/>
-                </button>
-                <button className="instrument"
-                    onClick={() => {
-                        setActions(prevState => [
-                            ...prevState,
-                            {
-                                type: ArticleActionTypes.PRE_TEXT,
-                                content: null,
-                                language: null,
-                                linkTitle: null
-                            }
-                        ])
-                    }}
-                >
-                    <i className="fa-solid fa-tree"/>
-                </button>
+                />
+                <Instrument 
+                    handleNewAction={handleNewAction} 
+                    awesomeClass='fa-bold' 
+                    action={returnAction(ArticleActionTypes.BOLD_TEXT)}
+                />
             </div>
         </div>
     )

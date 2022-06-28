@@ -67,16 +67,6 @@ const ActionComponent:FC<ActionComponentProps> = ({action}) => {
                     </div>
                 </div>
             )
-        case ArticleActionTypes.LINK:
-            return (
-                <div className="action-box">
-                    <div className="action-box-simple-text">
-                        <div>
-                            <a style={{color: 'blue'}} href={`${action.content}`}>{action.linkTitle}</a>
-                        </div>
-                    </div>
-                </div>
-            )
         case ArticleActionTypes.TEXT:
             return (
                 <div className="action-box">
@@ -111,31 +101,7 @@ const ActionComponent:FC<ActionComponentProps> = ({action}) => {
                     </div>
                 </div>
             )
-        case ArticleActionTypes.FORMULA:
-            return (
-                <div className="action-box">
-                    <div className="action-box-simple-text">
-                        <div>
-                            <Latex>{action.content}</Latex>
-                        </div>
-                    </div>
-                </div>
-            )
-        case ArticleActionTypes.PRE_TEXT:
-            return (
-                <div className="action-box">
-                    <div className="action-box-simple-text">
-                        <pre>
-                            {action.content}
-                        </pre>
-                    </div>
-                </div>
-            )
         default:
-            return (
-                <div>
-
-                </div>
-            )
+            return null
     }
 }

@@ -1,29 +1,33 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
+import { Xmark } from "../Xmark";
+import NoteActionsContextHandlers from "./context";
+import styles from './style.module.scss'
 
-interface QuoteArticleProps {
-    handleText: (value: string) => void;
-    content: string | null;
-    removeAction: () => void;
+interface Props {
+    content: string;
+    tags: string[]
 }
 
-export const QuoteArticle:FC<QuoteArticleProps> = ({
-    handleText, content, removeAction
-}) => {
-    const [inputValue, setInputValue] = useState<string>('');
+export const QuoteArticle:FC<Props> = ({content, tags}) => {
+    const [inputValue, setInputValue] = useState<string>(content);
+
+    const contextStore = useContext(NoteActionsContextHandlers)
+
+    if (!contextStore?.handleText && !contextStore?.removeAction && !contextStore?.handleLang)
+        return null
+
+    const {handleText, removeAction} = contextStore
 
     return (
-        <div className="action-box action-box-quote">
-            <input 
+        <div className={styles["action-box"]}>
+            <input className={styles['input-quote']}
                 onBlur={(e) => {handleText(e.target.value)}}
-                className="input-default input-quote" 
-                type="text" 
-                placeholder="Some quote here"
+                type="text" placeholder="Some quote here"
                 onChange={e => setInputValue(e.target.value)}
-                value={inputValue ? inputValue : typeof content === 'string' ? content : ''}
+                value={inputValue}
             />
-            <i className="fa-solid fa-xmark action-box-rm"
-                onClick={removeAction}
-            />
+            <p className={styles['tags-box']}>{tags.join(', ')}</p>
+            <Xmark removeAction={removeAction} />
         </div>
     )
 }

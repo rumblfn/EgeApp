@@ -1,45 +1,40 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { ArticleAction } from "../../types/article";
-import { ArticleActionComponent } from "../articleAction";
+import { ArticleActionComponent } from "../ArticleAction";
 import { nanoid } from "nanoid";
 
 import './style.css';
+import ArticleActionsContext from "../../routes/newArticle/context";
 
-interface Props {
-    actions: ArticleAction[];
-    setActions: (newState: ArticleAction[] | 
-        ((prevState: ArticleAction[]) 
-            => ArticleAction[])) 
-    => void;
-    saveArticleToDrafts: () => void;
-    publishArticle: () => void;
-}
 
-export const ArticleWhiteList:FC<Props> = ({actions, setActions, saveArticleToDrafts, publishArticle}) => {
+export const ArticleWhiteList = () => {
+
+    const contextStore = useContext(ArticleActionsContext)
     
-    return (
-        <div className="article-template">
-            <div className="main-environment">
-                {actions.map((action, index) => 
-                    <ArticleActionComponent 
-                        key={nanoid(8)}
-                        index={index}
-                        action={action}
-                        actions={actions}
-                        setActions={setActions}
-                    />
-                )}
+    if (contextStore?.actions && contextStore.saveArticle && contextStore.publishArticle)
+        return (
+            <div className="article-template">
+                <div className="main-environment">
+                    {contextStore.actions.map((action, index) => 
+                        <ArticleActionComponent 
+                            key={nanoid(8)}
+                            index={index}
+                            action={action}
+                            actions={contextStore.actions}
+                        />
+                    )}
+                </div>
+                <button className="profile-image-upload-button article-template-save"
+                    onClick={() => {contextStore.saveArticle(true)}}
+                >
+                    <span className="text">Preserve</span>
+                </button>
+                <button className="profile-image-upload-button article-template-publish"
+                    onClick={() => {contextStore.publishArticle(true)}}
+                >
+                    <span className="text">Publish</span>
+                </button>
             </div>
-            <button className="profile-image-upload-button article-template-save"
-                onClick={saveArticleToDrafts}
-            >
-                <span className="text">Preserve</span>
-            </button>
-            <button className="profile-image-upload-button article-template-publish"
-                onClick={publishArticle}
-            >
-                <span className="text">Publish</span>
-            </button>
-        </div>
-    )
+        )
+    return null
 }
